@@ -42,16 +42,16 @@ class razoo_donation_widget {
 		add_shortcode('razoo_widget', array(&$this, 'shortcode_widget_customize'));
 		
 		// set some defaults
+    $options = get_option('razoo_options');
 		self::$default_atts = array(
-			'id' => '????'
-			, 'title' => 'Please Donate'
-			, 'short_description' => 'Please donate any amount or fill in the blank after "OR" with sponsorship level. Thank you for supporting us!'
-			#, 'long_description' => $content
-			, 'color' => '#3D9B0C'
+			'id' => $options['charity_id']
+			, 'title' => $options['title']
+			, 'short_description' => $options['summary']
+			, 'color' => '#' . $options['color']
 			, 'donation_options' => '5=Friend|25=Benefactor|100=Benefactor|500=Sponsor'
-			, 'image' => 'true'
+			, 'image' => $options['show_image']
 		);
-		self::$default_long_description = 'Please <a href="/contact">contact us</a> if you have any questions.  Read more about our organization from the <a href="/about">About Us</a> page.';
+		self::$default_long_description = $options['more_info'];
 
 	}//--	fn	__construct
 
@@ -60,7 +60,7 @@ class razoo_donation_widget {
 	 * @param $atts shortcode attributes {id, title, short_description, color, donation_options, image}
 	 * @param $content shortcode content {i.e. long_description}
 	 */
-	function shortcode_widget_customize($atts, $content = null){
+	function shortcode_widget_customize($atts, $content = NULL){
 		$shortcode_params = shortcode_atts(self::$default_atts, $atts);
 		
 		// turn donation options list into param list
@@ -78,10 +78,9 @@ class razoo_donation_widget {
 	function embed($shortcode_params, $content = NULL) {
 			extract($shortcode_params);
 		# print_r( array( 'params' => $shortcode_params, 'att' => $atts ) );
-		
 		// fallback & default
 		if( !isset($long_description) ) $long_description = $content;
-		if( NULL === $long_description ){
+		if( $long_description == "" ){
 			$long_description = self::$default_long_description;
 		}
 		
@@ -105,7 +104,7 @@ class razoo_donation_widget {
 			// turn listing into json list
 			echo self::fallback_json_encode( $donation_options );
 			?>
-		,"image":"<?php echo $image ?>"
+		,"image":"<?php echo ($image == 'true') ? $image : 'false'; ?>"
 		};
 		var r_protocol=(("https:"==document.location.protocol)?"https://":"http://");var r_path='www.razoo.com/javascripts/widget_loader.js';
 		var r_identifier='<?php echo $id?>';
@@ -198,10 +197,19 @@ class razoo_donation_widget {
 	}//--	fn	fallback_json_encode
 
 
-
+  
 }///---	class	razoo_donation_widget
 
 
+//Setup some constants for us to more easily work with files
+define("RAZOO_DONATION_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "/");
+define("RAZOO_DONATION_PLUGINFULLPATH", WP_PLUGIN_DIR . RAZOO_DONATION_PLUGINPATH);
+define("RAZOO_DONATION_PLUGINFULLURL", WP_PLUGIN_URL . RAZOO_DONATION_PLUGINPATH);
+
+//Include the settings if we're in the admin section.
+if(is_admin()){
+  require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-settings.php');
+}
 // engage!
 new razoo_donation_widget();
 
