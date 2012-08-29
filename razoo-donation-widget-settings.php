@@ -3,19 +3,24 @@
 class razoo_options_page {
   
   public function __construct() {
-    add_action('admin_menu', array(&$this, 'add_settings_page'));
-    add_action('admin_init', array(&$this, 'settings_init'));
-    add_action('admin_head', array(&$this, 'custom_admin_css'));
+    add_action('admin_menu', array($this, 'add_settings_page'));
+    add_action('admin_init', array($this, 'settings_init'));
+    add_action('admin_head', array($this, 'custom_admin_css'));
+    add_action('admin_head', array($this, 'add_styles_scripts'));
+    
   }
   
   public function add_settings_page(){
-    add_options_page(
+    $settings = add_options_page(
       'Razoo Donation Widget',
       'Razoo Donation Widget',
       'manage_options',
       'razoo-donation-widget-settings',
       array($this, 'settings_page_content')
     );
+    
+    //Add our styles and scripts only on the settings page.
+    add_action('load-' . $settings, array($this, 'add_styles_scripts'));
   }
   
   public function settings_page_content(){
@@ -150,8 +155,17 @@ class razoo_options_page {
     $options = get_option('razoo_options');
     $color = $options['color'];
     
-    echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
+    echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" /><div id="colorpicker"></div>';
     echo '<p class="description">The color determines the color used for the donation widget.  You should match this closely to your website\'s colors.</p>';
+    ?>
+    <script>
+      //Run this on our settings page.
+      jQuery(document).ready(function(){
+        jQuery('#colorpicker').farbtastic('#color');
+        console.log(jQuery('#colorpicker'));
+      });
+    </script>
+    <?php
   }
   
   //Show Image
@@ -178,7 +192,7 @@ class razoo_options_page {
     return $valid;
   }
   
-  //Admin CSS
+  //Admin CSS and JS
   function custom_admin_css(){
     ?>
     <style>
@@ -186,6 +200,11 @@ class razoo_options_page {
       .settings_page_razoo-donation-widget-settings .form-table { width: auto; clear: none; }
     </style>
     <?php
+  }
+  
+  function add_styles_scripts(){
+    wp_enqueue_style( 'farbtastic' );
+    wp_enqueue_script( 'farbtastic' );
   }
   
 }

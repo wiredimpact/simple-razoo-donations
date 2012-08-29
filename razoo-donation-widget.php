@@ -47,7 +47,7 @@ class razoo_donation_widget {
 			'id' => $options['charity_id']
 			, 'title' => $options['title']
 			, 'short_description' => $options['summary']
-			, 'color' => '#' . $options['color']
+			, 'color' => $options['color']
 			, 'donation_options' => '5=Friend|25=Benefactor|100=Benefactor|500=Sponsor'
 			, 'image' => $options['show_image']
 		);
