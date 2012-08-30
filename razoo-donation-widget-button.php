@@ -10,7 +10,6 @@ class razoo_button {
       add_filter('mce_buttons', array($this, 'register_razoo_button'));
       add_filter('mce_external_plugins', array($this, 'add_razoo_tinymce_plugin'));
       add_filter('tiny_mce_version', array($this, 'refresh_mce'));
-      add_action('wp_ajax_razoo_popup', array($this, 'razoo_popup'));
     }
   }
 
@@ -28,31 +27,6 @@ class razoo_button {
   function refresh_mce($version) {
     return ++$version;
   }
-  
-  function razoo_popup(){
-    $options = get_option('razoo_options');
-    
-   ?>
-    
-    <table id="razoo-popup-table" class="form-table">
-      <tr>
-        <td colspan="2">Instructions will go here.  This is a lot of instructions here.  Crazy instructions.</td>
-      </tr>
-      <tr>
-				<th><label for="razoo-title">Title (Default: <?php echo $options['title']; ?>)</label></th>
-				<td><input type="text" id="razoo-title" name="razoo-title" /><br />
-				<small>Specify the title of the donation widget.</small></td>
-			</tr>
-      
-		</table>
-		<p class="submit">
-			<input type="button" id="razoo-popup-submit" class="button-primary" value="Insert Razoo Donation Widget" name="submit" />
-		</p>
-   
-    <?php
-    die(); //Ensures we'll get back exactly what we want
-  }
-
 }
 
 //Add the button during admin init.
