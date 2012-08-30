@@ -30,10 +30,6 @@ class razoo_donation_widget {
 	 * Internal, global storage for defaults
 	 */
 	public static $default_atts;
-	/**
-	 * Internal, global storage for defaults
-	 */
-	public static $default_long_description;
 
 	/**
 	 * Initiate the plugin, options, etc
@@ -53,8 +49,8 @@ class razoo_donation_widget {
 			, 'color' => $options['color']
 			, 'donation_options' => '5=Friend|25=Benefactor|100=Benefactor|500=Sponsor'
 			, 'image' => $options['show_image']
+      , 'long_description' => $options['more_info']
 		);
-		self::$default_long_description = $options['more_info'];
 
 	}//--	fn	__construct
 
@@ -79,13 +75,7 @@ class razoo_donation_widget {
 	 * @param $content shortcode content {i.e. long_description}
 	 */
 	function embed($shortcode_params, $content = NULL) {
-			extract($shortcode_params);
-		# print_r( array( 'params' => $shortcode_params, 'att' => $atts ) );
-		// fallback & default
-		if( !isset($long_description) ) $long_description = $content;
-		if( $long_description == "" ){
-			$long_description = self::$default_long_description;
-		}
+		extract($shortcode_params);
 		
 		// cheat!
 		/* catch the echo output, so we can control where it appears in the text  */

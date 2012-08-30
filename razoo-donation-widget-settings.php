@@ -50,6 +50,7 @@ class razoo_options_page {
       array($this, 'validate_options')
     );
     
+    /**Option Settings**/
     add_settings_section(
       'razoo-options-main',
       'Settings',
@@ -105,7 +106,16 @@ class razoo_options_page {
       'razoo-options-main'
     );
     
+    
+    
     //TODO Add donation choices.
+    
+    add_settings_section(
+      'razoo-options-docs',
+      'How Tos',
+      array($this, 'options_docs_text'),
+      'razoo-donation-widget-settings'
+    );
   }
   
   //Settings Section and Fields
@@ -191,6 +201,11 @@ class razoo_options_page {
     //TODO Do real validation
     
     return $valid;
+  }
+  
+  
+  function options_docs_text(){
+    echo '<p>Get all the information you need here on how to customize this plugin to what you need. THIS NEEDS TO BE ADDED. THIS COULD ALSO BE DONE USING THE HELP CONTEXT MENU.</p>';
   }
   
   //Admin CSS and JS
