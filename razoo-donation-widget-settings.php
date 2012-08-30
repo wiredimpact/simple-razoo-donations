@@ -156,7 +156,7 @@ class razoo_options_page {
     $color = $options['color'];
     
     echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
-    echo '<p class="description">Provide the color you want for the donation widget here in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.</p>';
+    echo '<p class="description">Provide the color you want for the donation widget in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.</p>';
     echo '<div id="colorpicker"></div>';
     ?>
     <script>

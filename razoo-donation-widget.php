@@ -209,9 +209,10 @@ define("RAZOO_DONATION_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "
 define("RAZOO_DONATION_PLUGINFULLPATH", WP_PLUGIN_DIR . RAZOO_DONATION_PLUGINPATH);
 define("RAZOO_DONATION_PLUGINFULLURL", WP_PLUGIN_URL . RAZOO_DONATION_PLUGINPATH);
 
-//Include the settings if we're in the admin section.
+//Include the settings and button if we're in the admin section.
 if(is_admin()){
   require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-settings.php');
+  require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-button.php');
 }
 // engage!
 new razoo_donation_widget();
