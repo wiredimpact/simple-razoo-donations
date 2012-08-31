@@ -106,6 +106,14 @@ class razoo_options_page {
       'razoo-options-main'
     );
     
+    add_settings_field(
+      'donation-options',
+      'Donation Options',
+      array($this, 'donation_option_input'),
+      'razoo-donation-widget-settings',
+      'razoo-options-main'
+    );
+    
     
     
     //TODO Add donation choices.
@@ -168,15 +176,6 @@ class razoo_options_page {
     echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
     echo '<p class="description">Provide the color you want for the donation widget in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.</p>';
     echo '<div id="colorpicker"></div>';
-    ?>
-    <script>
-      //Run this on our settings page.
-      jQuery(document).ready(function(){
-        jQuery('#colorpicker').farbtastic('#color');
-        console.log(jQuery('#colorpicker'));
-      });
-    </script>
-    <?php
   }
   
   //Show Image
@@ -186,6 +185,65 @@ class razoo_options_page {
     
     echo '<label for="show-image"><input id="show-image" name="razoo_options[show_image]" type="checkbox" value="true" ' . checked($show_image, 'true', false) . '/>';
     echo ' Do you want the main image for your organization to show up on the donation widget?.</label>';
+  }
+  
+  //Donation Options
+  function donation_option_input(){
+    $options = get_option('razoo_options');
+    $donation_options = $options['donation_options'];
+    
+    echo '<p class="description">Add the donation options you want to offer potential donors.  The field to input any amount will always be added.</p>';
+    
+//    echo '<pre>';
+//    var_dump($donation_options);
+//    echo '</pre>';
+    
+    
+    
+    //Add link to add more donation options
+    
+    //Format to be entered and retrieved: 5=Friend|25=Benefactor|100=Benefactor|500=Sponsor
+    //Add three donation amounts by default or if they already have them add as many as they have
+    ?>
+<div id="donation-option-fields">
+    <div class="row">
+      <label for="donation_amount[1]">$</label> <input id="donation_amount[1]" name="donation_amount[1]" type="text" class="small-text" value="" />
+      <input id="donation_title[1]" name="donation_title[1]" type="text" class="regular-text" value="" />
+      <img id="donation-trash[1]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+    </div>
+    
+    <div class="row">
+      <label for="donation_amount[2]">$</label> <input id="donation_amount[2]" name="donation_amount[2]" type="text" class="small-text" value="" />
+      <input id="donation_title[2]" name="donation_title[2]" type="text" class="regular-text" value="" />
+      <img id="donation-trash[2]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+    </div>
+    
+    <div class="row">
+      <label for="donation_amount[3]">$</label> <input id="donation_amount[3]" name="donation_amount[3]" type="text" class="small-text" value="" />
+      <input id="donation_title[3]" name="donation_title[3]" type="text" class="regular-text" value="" />
+      <img id="donation-trash[3]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+    </div>
+    
+    <div class="row">
+      <label for="donation_amount[4]">$</label> <input id="donation_amount[4]" name="donation_amount[4]" type="text" class="small-text" value="" />
+      <input id="donation_title[4]" name="donation_title[1]" type="text" class="regular-text" value="" />
+      <img id="donation-trash[4]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+    </div>
+    
+    <div class="row">
+      <label for="donation_amount[5]">$</label> <input id="donation_amount[5]" name="donation_amount[5]" type="text" class="small-text" value="" />
+      <input id="donation_title[5]" name="donation_title[1]" type="text" class="regular-text" value="" />
+      <img id="donation-trash[5]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+    </div>
+</div>
+    <?php
+    
+    echo '<p class="description"><a href="#" id="add-donation-amount">Add Donation Amount (Up to 5)</a></p>';
+    
+    //Add hidden input that is updated on save with the data from all the fields using jQuery
+    
+    echo '<input id="donation_options" name="razoo_options[donation_options]" type="hidden" value="' . $donation_options .'" />';
+    
   }
   
   
@@ -221,6 +279,7 @@ class razoo_options_page {
   function add_styles_scripts(){
     wp_enqueue_style( 'farbtastic' );
     wp_enqueue_script( 'farbtastic' );
+    wp_enqueue_script('razoo-settings', RAZOO_DONATION_PLUGINFULLURL . 'js/settings.js');
   }
   
 }
