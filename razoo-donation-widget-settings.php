@@ -27,7 +27,7 @@ class razoo_options_page {
     ?>
     <div class="wrap">
       <?php screen_icon(); ?>
-      <h2>Razoo Donation Widget Settings</h2>
+      <h2>Razoo Donation Widget</h2>
       <form id="razoo-settings" action="options.php" method="post">
         
         <?php settings_fields('razoo_options'); ?>
@@ -50,6 +50,14 @@ class razoo_options_page {
       array($this, 'validate_options')
     );
     
+    /**Documentation Info**/
+    add_settings_section(
+      'razoo-options-docs',
+      'How to Add the Donation Widget to Your Website',
+      array($this, 'options_docs_text'),
+      'razoo-donation-widget-settings'
+    );
+    
     /**Option Settings**/
     add_settings_section(
       'razoo-options-main',
@@ -60,7 +68,7 @@ class razoo_options_page {
     
     add_settings_field(
       'charity_id',
-      'ID',
+      'Razoo ID',
       array($this, 'id_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -114,17 +122,24 @@ class razoo_options_page {
       'razoo-options-main'
     );
     
-    add_settings_section(
-      'razoo-options-docs',
-      'How Tos',
-      array($this, 'options_docs_text'),
-      'razoo-donation-widget-settings'
-    );
   }
+  
+  //Documentation text
+  function options_docs_text(){ ?>
+    <p>To add the Razoo Donation widget to your website follow these steps:</p>
+    <ol>
+      <li>Complete the settings below with all your organization's information, then save your changes.</li>
+      <li>Go to the edit screen for the page or post where you want to add the donation widget.</li>
+      <li>Place your cursor within the editor's text where you want the donation widget to be added.</li>
+      <li>Click the Razoo icon in the WordPress editor toolbar <img class="editor-icon" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/razoo-icon.png" />.  The Razoo shortcode reading "[razoo_widget]" will be added in the editor.</li>
+      <li>Click the blue "Publish" or "Update" button to save your changes and add the widget to your live website.</li>
+    </ol>
+    
+  <?php }
   
   //Settings Section and Fields
   function options_settings_text(){
-    echo '<p>Adjust your Razoo Donation Widget settings.  Every time you save changes the widget on the right will update to show you exactly what it will look like on your website.  To add the Razoo Donation widget to your website simply type "[razoo_widget]" into the WordPress editor wherever you want to add the donation widget.';
+    echo '<p>Adjust your Razoo Donation Widget settings.  Every time you save changes the widget on the right will update to show you exactly what it will look like on your website.';
   }
   
   //Charity ID
@@ -133,7 +148,7 @@ class razoo_options_page {
     $id = $options['charity_id'];
     
     echo '<input id="id" name="razoo_options[charity_id]" type="text" value="' . $id .'" class="regular-text" />';
-    echo '<p class="description">This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America ID is "United-Way-Of-America".  You can view their ID at <a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>.</p>';
+    echo '<p class="description">This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at <a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>.</p>';
   }
   
   //Widget Title
@@ -151,7 +166,7 @@ class razoo_options_page {
     $summary = $options['summary'];
     
     echo '<input id="summary" name="razoo_options[summary]" type="text" value="' . $summary .'" class="regular-text" />';
-    echo '<p class="description">The summary is a short description of your organization or an ask for people to donate.</p>';
+    echo '<p class="description">The summary is a short description of your organization or an ask for people to donate.  This text shows up just below the title.</p>';
   }
   
   //More Info
@@ -160,13 +175,13 @@ class razoo_options_page {
     $more_info = $options['more_info'];
     
     echo '<textarea id="more-info" rows="5" name="razoo_options[more_info]" class="large-text">' . $more_info .'</textarea>';
-    echo '<p class="description">The more info section can be much longer, describing more about your organization and where the donors money will go.</p>';
+    echo '<p class="description">The more info section can be much longer, describing more about your organization and where the donors money will go.  This text shows up when users click the "More info" link on the donation widget.</p>';
   }
   
   //Color
   function color_input(){
     $options = get_option('razoo_options');
-    $color = $options['color'];
+    $color = ($options['color'] != "") ? $options['color'] : '#3D9B0C';
     
     echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
     echo '<p class="description">Provide the color you want for the donation widget in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.</p>';
@@ -185,7 +200,7 @@ class razoo_options_page {
   //Donation Options
   function donation_option_input(){
     $options = get_option('razoo_options');
-    $donation_options = (isset($options['donation_options'])) ? $options['donation_options'] : '';
+    $donation_options = (isset($options['donation_options'])) ? $options['donation_options'] : null;
     
     if($donation_options != ''){
       $donation_options = explode('|', $donation_options);
@@ -194,18 +209,21 @@ class razoo_options_page {
       }
     }
     
-    echo '<p class="description">Add the donation options you want to offer potential donors.  The field to input any amount will always be added.</p>';
+    echo '<p class="description">Add the donation options you want to offer potential donors with the amount in the small box and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.  </p>';
     
     //Add three donation amounts by default or if they already have them add as many as they have    
     echo '<div id="donation-option-fields">';
-    if(isset($donation_options) && $donation_options != ''){
+    if(isset($donation_options)){
       for($i = 0; $i < 5; $i++){
-        $hide = (isset($donation_options[$i][0]) && $donation_options[$i][0] != '') ? false : true;
-        echo self::make_donation_row($i, $donation_options[$i][0], $donation_options[$i][1], $hide);
+        $donation_amount = ($donation_options != '' && isset($donation_options[$i][0])) ? $donation_options[$i][0] : null;
+        $donation_description = ($donation_options != '' && isset($donation_options[$i][1])) ? $donation_options[$i][1] : null;
+        $hide = ($donation_options != '' && isset($donation_options[$i][0]) && $donation_options[$i][0] != '') ? false : true;
+        
+        echo self::make_donation_row($i, $donation_amount, $donation_description, $hide);
       }
       
     }
-    else {
+    else { //If they are loading the settings page for the first time
       for($i = 0; $i < 5; $i++){
         if($i < 3){ //Show the first three by default before they've ever saved settings
           echo self::make_donation_row($i, null, null, false); 
@@ -259,21 +277,17 @@ class razoo_options_page {
     return $row;
   }
   
-  
-  function options_docs_text(){
-    echo '<p>Get all the information you need here on how to customize this plugin to what you need. THIS NEEDS TO BE ADDED. THIS COULD ALSO BE DONE USING THE HELP CONTEXT MENU.</p>';
-  }
-  
   //Admin CSS and JS
   function custom_admin_css(){
     ?>
     <style>
+      #razoo-settings .editor-icon { vertical-align: middle; }
       .razoo-widget { margin: 50px 100px; }
-      .settings_page_razoo-donation-widget-settings .form-table { width: auto; clear: none; }
+      #razoo-settings .form-table { width: auto; clear: none; }
       #donation-option-fields .row img { vertical-align: middle; cursor: pointer; }
       #donation-option-fields .hide { display: none; }
-      .settings_page_razoo-donation-widget-settings .default { color: gray; text-decoration: none; }
-      .settings_page_razoo-donation-widget-settings .default:hover { cursor: default; }
+      #razoo-settings .default { color: gray; text-decoration: none; }
+      #razoo-settings .default:hover { cursor: default; }
     </style>
     <?php
   }

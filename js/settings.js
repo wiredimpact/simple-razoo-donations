@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
   var add_donation_amount = jQuery('#add-donation-amount'),
-      donation_option_fields = jQuery('#donation-option-fields'),
-      trash_cans = donation_option_fields.find('.row img');
+  donation_option_fields = jQuery('#donation-option-fields'),
+  trash_cans = donation_option_fields.find('.row img');
       
   //Get the total number of showing fields    
   function get_showing_total(){
@@ -14,7 +14,7 @@ jQuery(document).ready(function(){
   add_donation_amount.click(function(){
     donation_option_fields.find('.row.hide').first().removeClass('hide');
     
-    if(get_showing_total() == 5){
+    if(get_showing_total() === 5){
       jQuery(this).addClass('default');
     }
     else {
@@ -23,7 +23,6 @@ jQuery(document).ready(function(){
           
     return false;
   });
-  
   
   //Click to remove donation option
   trash_cans.click(function(){
@@ -45,9 +44,17 @@ jQuery(document).ready(function(){
       
       var $this = jQuery(this);
       
-      if($this.val() != ''){
+      if($this.val() !== ''){
         var amount, description;
-        amount = parseFloat($this.val());
+        
+        //If they included a decimal then we want to set it to two numbers after decimal
+        if($this.val().indexOf('.') === -1){
+          amount = parseFloat($this.val()); 
+        }
+        else {
+          amount = parseFloat($this.val()).toFixed(2);
+        }
+        
         description = $this.siblings('input').val();
 
         donate_options += amount + '=' + description + '|';
@@ -56,10 +63,8 @@ jQuery(document).ready(function(){
     });
     
     donate_options = donate_options.slice(0,-1);
-    console.log(donate_options);
     
     jQuery('#donation-options').val(donate_options);
-    console.log(jQuery('#donation-options').val());
   }); 
   
 }); //End Document Ready

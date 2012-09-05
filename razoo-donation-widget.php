@@ -59,8 +59,10 @@ class razoo_donation_widget {
 	 */
 	function shortcode_widget_customize($atts, $content = NULL){
 		$shortcode_params = shortcode_atts(self::$default_atts, $atts);
-		
-    $shortcode_params['donation_options'] = self::parse_query_string($shortcode_params['donation_options']);
+		   
+    if($shortcode_params['donation_options'] != ''){
+      $shortcode_params['donation_options'] = self::parse_query_string($shortcode_params['donation_options']);
+    }
     
 		return $this->embed($shortcode_params, $content);
 	}//--	fn	shortcode_widget_customize
@@ -107,14 +109,11 @@ class razoo_donation_widget {
 			?>
 		,"image":"<?php echo ($image == 'true') ? $image : 'false'; ?>"
 		};
-    console.log(r_params);
 		var r_protocol=(("https:"==document.location.protocol)?"https://":"http://");var r_path='www.razoo.com/javascripts/widget_loader.js';
 		var r_identifier='<?php echo $id?>';
 		document.write(unescape("%3Cscript id='razoo_widget_loader_script' src='"+r_protocol+r_path+"' type='text/javascript'%3E%3C/script%3E"));
 	</script>
 		<?php
-		
-		///TODO: add a hook for more stuff?
 		
 		return ob_get_clean();	//return the output (and stop the buffer)
 
