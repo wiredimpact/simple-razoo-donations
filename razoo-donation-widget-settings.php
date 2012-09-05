@@ -35,7 +35,7 @@ class razoo_options_page {
         <?php do_settings_sections('razoo-donation-widget-settings'); ?>
         
         <p class="submit">
-          <input name="Submit" type="submit" class="button-primary" value="Save Changes & Update Donation Widget" />
+          <input id="razoo-submit" name="Submit" type="submit" class="button-primary" value="Save Changes & Update Donation Widget" />
         </p>
         
       </form>
@@ -242,7 +242,7 @@ class razoo_options_page {
     
     //Add hidden input that is updated on save with the data from all the fields using jQuery
     
-    echo '<input id="donation_options" name="razoo_options[donation_options]" type="hidden" value="' . $donation_options .'" />';
+    echo '<input id="donation-options" name="razoo_options[donation_options]" type="hidden" value="' . $donation_options .'" />';
     
   }
   

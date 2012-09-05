@@ -39,6 +39,8 @@ class razoo_donation_widget {
 		
 		// set some defaults
     $options = get_option('razoo_options');
+    
+    var_dump($options);
         
 		self::$default_atts = array(
 			'id' => (isset($options['charity_id'])) ? $options['charity_id'] : 'United-Way-of-America'

@@ -37,11 +37,29 @@ jQuery(document).ready(function(){
     }
   });
   
-  
-  //Click of submit
-  //Take all form values and place them in the correct format
-  
-  
+  //Pull the donation amount and description into a string that can be used in the widget
+  jQuery('#razoo-submit').submit(function(){
+    var donate_options = '';
+    
+    donation_option_fields.find('.row .small-text').each(function(){
+      
+      var $this = jQuery(this);
+      
+      if($this.val() != ''){
+        var amount, description;
+        amount = parseFloat($this.val());
+        description = $this.siblings('input').val();
+
+        donate_options += amount + '=' + description + '|';
+      }
+      
+    });
+    
+    donate_options = donate_options.slice(0,-1);
+    console.log(donate_options);
+    
+    jQuery('#donation_options').val(donate_options);
+  }); 
   
 }); //End Document Ready
 
