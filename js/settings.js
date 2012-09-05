@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
   });
   
   //Pull the donation amount and description into a string that can be used in the widget
-  jQuery('#razoo-submit').submit(function(){
+  jQuery('#razoo-settings').submit(function(){
     var donate_options = '';
     
     donation_option_fields.find('.row .small-text').each(function(){
@@ -59,6 +59,7 @@ jQuery(document).ready(function(){
     console.log(donate_options);
     
     jQuery('#donation_options').val(donate_options);
+    console.log(jQuery('#donation_options').val());
   }); 
   
 }); //End Document Ready

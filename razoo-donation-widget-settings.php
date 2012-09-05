@@ -28,7 +28,7 @@ class razoo_options_page {
     <div class="wrap">
       <?php screen_icon(); ?>
       <h2>Razoo Donation Widget Settings</h2>
-      <form action="options.php" method="post">
+      <form id="razoo-settings" action="options.php" method="post">
         
         <?php settings_fields('razoo_options'); ?>
         <div class="alignright razoo-widget"><?php echo do_shortcode('[razoo_widget]'); ?></div>
@@ -114,10 +114,6 @@ class razoo_options_page {
       'razoo-options-main'
     );
     
-    
-    
-    //TODO Add donation choices.
-    
     add_settings_section(
       'razoo-options-docs',
       'How Tos',
@@ -190,15 +186,9 @@ class razoo_options_page {
   //Donation Options
   function donation_option_input(){
     $options = get_option('razoo_options');
-    $donation_options = $options['donation_options'];
+    $donation_options = (isset($options['donation_options'])) ? $options['donation_options'] : '';
     
     echo '<p class="description">Add the donation options you want to offer potential donors.  The field to input any amount will always be added.</p>';
-    
-//    echo '<pre>';
-//    var_dump($donation_options);
-//    echo '</pre>';
-    
-    
     
     //Add link to add more donation options
     
@@ -241,7 +231,6 @@ class razoo_options_page {
     echo '<p class="description"><a href="#" id="add-donation-amount">Add Donation Amount (Up to 5)</a></p>';
     
     //Add hidden input that is updated on save with the data from all the fields using jQuery
-    
     echo '<input id="donation-options" name="razoo_options[donation_options]" type="hidden" value="' . $donation_options .'" />';
     
   }
@@ -256,6 +245,7 @@ class razoo_options_page {
     $valid['more_info'] = $input['more_info'];
     $valid['color'] = $input['color'];
     $valid['show_image'] = $input['show_image'];
+    $valid['donation_options'] = $input['donation_options'];
     //TODO Do real validation
     
     return $valid;

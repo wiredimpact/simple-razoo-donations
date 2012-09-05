@@ -43,7 +43,7 @@ class razoo_donation_widget {
     var_dump($options);
         
 		self::$default_atts = array(
-			'id' => (isset($options['charity_id'])) ? $options['charity_id'] : 'United-Way-of-America'
+			'id' => (isset($options['charity_id']) && $options['charity_id'] != '') ? $options['charity_id'] : 'United-Way-of-America'
 			, 'title' => (isset($options['title'])) ? $options['title'] : ''
 			, 'short_description' => (isset($options['summary'])) ? $options['summary'] : ''
 			, 'color' => (isset($options['color'])) ? $options['color'] : ''
