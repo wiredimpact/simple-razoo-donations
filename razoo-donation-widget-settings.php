@@ -165,7 +165,6 @@ class razoo_options_page {
   
   //Color
   function color_input(){
-    //TODO Add a color picker here instead of a plain text area (http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/).
     $options = get_option('razoo_options');
     $color = $options['color'];
     
@@ -180,7 +179,7 @@ class razoo_options_page {
     $show_image = $options['show_image'];
     
     echo '<label for="show-image"><input id="show-image" name="razoo_options[show_image]" type="checkbox" value="true" ' . checked($show_image, 'true', false) . '/>';
-    echo ' Do you want the main image for your organization to show up on the donation widget?.</label>';
+    echo ' Do you want the main image for your organization to show up on the donation widget?</label>';
   }
   
   //Donation Options
@@ -188,45 +187,35 @@ class razoo_options_page {
     $options = get_option('razoo_options');
     $donation_options = (isset($options['donation_options'])) ? $options['donation_options'] : '';
     
+    if($donation_options != ''){
+      $donation_options = explode('|', $donation_options);
+      for($i = 0; $i < count($donation_options); $i++){
+        $donation_options[$i] = explode('=', $donation_options[$i]);
+      }
+    }
+    
     echo '<p class="description">Add the donation options you want to offer potential donors.  The field to input any amount will always be added.</p>';
     
-    //Add link to add more donation options
-    
-    //Format to be entered and retrieved: 5=Friend|25=Benefactor|100=Benefactor|500=Sponsor
-    //Add three donation amounts by default or if they already have them add as many as they have
-    ?>
-<div id="donation-option-fields">
-    <div class="row">
-      <label for="donation_amount[1]">$</label> <input id="donation_amount[1]" name="donation_amount[1]" type="text" class="small-text" value="" />
-      <input id="donation_title[1]" name="donation_title[1]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[1]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
-    </div>
-    
-    <div class="row">
-      <label for="donation_amount[2]">$</label> <input id="donation_amount[2]" name="donation_amount[2]" type="text" class="small-text" value="" />
-      <input id="donation_title[2]" name="donation_title[2]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[2]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
-    </div>
-    
-    <div class="row">
-      <label for="donation_amount[3]">$</label> <input id="donation_amount[3]" name="donation_amount[3]" type="text" class="small-text" value="" />
-      <input id="donation_title[3]" name="donation_title[3]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[3]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
-    </div>
-    
-    <div class="row hide">
-      <label for="donation_amount[4]">$</label> <input id="donation_amount[4]" name="donation_amount[4]" type="text" class="small-text" value="" />
-      <input id="donation_title[4]" name="donation_title[1]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[4]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
-    </div>
-    
-    <div class="row hide">
-      <label for="donation_amount[5]">$</label> <input id="donation_amount[5]" name="donation_amount[5]" type="text" class="small-text" value="" />
-      <input id="donation_title[5]" name="donation_title[1]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[5]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
-    </div>
-</div>
-    <?php
+    //Add three donation amounts by default or if they already have them add as many as they have    
+    echo '<div id="donation-option-fields">';
+    if(isset($donation_options) && $donation_options != ''){
+      for($i = 0; $i < 5; $i++){
+        $hide = (isset($donation_options[$i][0]) && $donation_options[$i][0] != '') ? false : true;
+        echo self::make_donation_row($i, $donation_options[$i][0], $donation_options[$i][1], $hide);
+      }
+      
+    }
+    else {
+      for($i = 0; $i < 5; $i++){
+        if($i < 3){ //Show the first three by default before they've ever saved settings
+          echo self::make_donation_row($i, null, null, false); 
+        }
+        else { //Hide the last two by default before they've ever saved settings
+          echo self::make_donation_row($i, null, null, true);
+        }
+      }
+    }
+    echo '</div>';
     
     echo '<p class="description"><a href="#" id="add-donation-amount">Add Donation Amount (Up to 5)</a></p>';
     
@@ -251,6 +240,25 @@ class razoo_options_page {
     return $valid;
   }
   
+  //Make the rows to handle the donation amounts and descriptions
+  function make_donation_row($num, $donation_amount = null, $donation_description = null, $hide = false){
+    $row = '';
+    
+    $row .= '<div class="row';
+    if($hide == true) $row .= ' hide';
+    $row .= '">';
+    $row .= '<label for="donation_amount[' . $num . ']">$</label> <input id="donation_amount[' . $num . ']" name="donation_amount[' . $num . ']" type="text" class="small-text" value="';
+    if(isset($donation_amount)) $row .= $donation_amount;
+    $row .= '" />';
+    $row .= '<input id="donation_title[' . $num . ']" name="donation_title[' . $num . ']" type="text" class="regular-text" value="';
+    if(isset($donation_description)) $row .=  $donation_description;
+    $row .= '" />';
+    $row .= '<img id="donation-trash[' . $num . ']" src="' . RAZOO_DONATION_PLUGINFULLURL . 'img/trash-can.png" />';
+    $row .= '</div>';
+    
+    return $row;
+  }
+  
   
   function options_docs_text(){
     echo '<p>Get all the information you need here on how to customize this plugin to what you need. THIS NEEDS TO BE ADDED. THIS COULD ALSO BE DONE USING THE HELP CONTEXT MENU.</p>';
@@ -265,6 +273,7 @@ class razoo_options_page {
       #donation-option-fields .row img { vertical-align: middle; cursor: pointer; }
       #donation-option-fields .hide { display: none; }
       .settings_page_razoo-donation-widget-settings .default { color: gray; text-decoration: none; }
+      .settings_page_razoo-donation-widget-settings .default:hover { cursor: default; }
     </style>
     <?php
   }

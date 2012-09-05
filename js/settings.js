@@ -58,8 +58,8 @@ jQuery(document).ready(function(){
     donate_options = donate_options.slice(0,-1);
     console.log(donate_options);
     
-    jQuery('#donation_options').val(donate_options);
-    console.log(jQuery('#donation_options').val());
+    jQuery('#donation-options').val(donate_options);
+    console.log(jQuery('#donation-options').val());
   }); 
   
 }); //End Document Ready

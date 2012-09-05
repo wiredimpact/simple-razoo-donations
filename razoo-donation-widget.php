@@ -39,15 +39,13 @@ class razoo_donation_widget {
 		
 		// set some defaults
     $options = get_option('razoo_options');
-    
-    var_dump($options);
         
 		self::$default_atts = array(
 			'id' => (isset($options['charity_id']) && $options['charity_id'] != '') ? $options['charity_id'] : 'United-Way-of-America'
 			, 'title' => (isset($options['title'])) ? $options['title'] : ''
 			, 'short_description' => (isset($options['summary'])) ? $options['summary'] : ''
 			, 'color' => (isset($options['color'])) ? $options['color'] : ''
-			, 'donation_options' => '5=Friend|25=Benefactor|100=Benefactor|500=Sponsor'
+			, 'donation_options' => (isset($options['donation_options'])) ? $options['donation_options'] : ''
 			, 'image' => (isset($options['show_image'])) ? $options['show_image'] : null
       , 'long_description' => (isset($options['more_info'])) ? $options['more_info'] : ''
 		);
@@ -62,12 +60,22 @@ class razoo_donation_widget {
 	function shortcode_widget_customize($atts, $content = NULL){
 		$shortcode_params = shortcode_atts(self::$default_atts, $atts);
 		
-		// turn donation options list into param list
-		parse_str( str_replace('|', '&', $shortcode_params['donation_options']), $shortcode_params['donation_options']);
-		
+    $shortcode_params['donation_options'] = self::parse_query_string($shortcode_params['donation_options']);
+    
 		return $this->embed($shortcode_params, $content);
 	}//--	fn	shortcode_widget_customize
-
+  
+  //Function used to put donation options in the correct format for JSON encoding
+  function parse_query_string($string) { 
+    $op = array(); 
+    $pairs = explode("|", $string); 
+    foreach ($pairs as $pair) { 
+        list($k, $v) = array_map("urldecode", explode("=", $pair)); 
+        $op[$k] = $v; 
+    } 
+    
+    return $op; 
+  } 
 
 	/**
 	 * Add razoo widget - embed with options
@@ -99,6 +107,7 @@ class razoo_donation_widget {
 			?>
 		,"image":"<?php echo ($image == 'true') ? $image : 'false'; ?>"
 		};
+    console.log(r_params);
 		var r_protocol=(("https:"==document.location.protocol)?"https://":"http://");var r_path='www.razoo.com/javascripts/widget_loader.js';
 		var r_identifier='<?php echo $id?>';
 		document.write(unescape("%3Cscript id='razoo_widget_loader_script' src='"+r_protocol+r_path+"' type='text/javascript'%3E%3C/script%3E"));
@@ -120,8 +129,8 @@ class razoo_donation_widget {
 	static function fallback_json_encode($data, $flags = null){
 		//fallback to provided method
 		if(function_exists('json_encode')){
-			if($flags) return json_encode($data, $flags);
-			
+      if($flags) return json_encode($data, $flags);
+      
 			return json_encode($data);
 			#return json_encode($data, ($flags ? $flags : JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_AMP));
 		}
@@ -191,7 +200,7 @@ class razoo_donation_widget {
 
 
   
-}///---	class	razoo_donation_widget
+}//---	class	razoo_donation_widget
 
 
 //Setup some constants for us to more easily work with files
