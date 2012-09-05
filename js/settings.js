@@ -5,20 +5,20 @@ jQuery(document).ready(function(){
       
   //Get the total number of showing fields    
   function get_showing_total(){
-    var total_showing_fields = donation_option_fields.find('.row:visible').length;
+    var total_showing_fields = donation_option_fields.find('.row:not(.hide)').length;
     
     return total_showing_fields;
   }
   
   //Click to add donation option
   add_donation_amount.click(function(){
-    donation_option_fields.find('.row:hidden').first().show();
+    donation_option_fields.find('.row.hide').first().removeClass('hide');
     
     if(get_showing_total() == 5){
-      jQuery(this).attr('style', 'color:gray; text-decoration:none;');
+      jQuery(this).addClass('default');
     }
     else {
-      jQuery(this).removeAttr('style');
+      jQuery(this).removeClass('default');
     }
           
     return false;
@@ -29,11 +29,11 @@ jQuery(document).ready(function(){
   trash_cans.click(function(){
     var $this = jQuery(this);
     
-    $this.closest('.row').hide();
+    $this.closest('.row').addClass('hide');
     $this.siblings('input').val('');
     
     if(get_showing_total() < 5){
-      add_donation_amount.removeAttr('style');
+      add_donation_amount.removeClass('default');
     }
   });
   

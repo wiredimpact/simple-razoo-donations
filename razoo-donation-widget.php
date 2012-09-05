@@ -39,17 +39,15 @@ class razoo_donation_widget {
 		
 		// set some defaults
     $options = get_option('razoo_options');
-    //If no Charity ID has been set let's use United Way as the default.
-    $options['charity_id'] = ($options['charity_id'] == "") ? 'United-Way-of-America' : $options['charity_id'];
-    
+        
 		self::$default_atts = array(
-			'id' => $options['charity_id']
-			, 'title' => $options['title']
-			, 'short_description' => $options['summary']
-			, 'color' => $options['color']
+			'id' => (isset($options['charity_id'])) ? $options['charity_id'] : 'United-Way-of-America'
+			, 'title' => (isset($options['title'])) ? $options['title'] : ''
+			, 'short_description' => (isset($options['summary'])) ? $options['summary'] : ''
+			, 'color' => (isset($options['color'])) ? $options['color'] : ''
 			, 'donation_options' => '5=Friend|25=Benefactor|100=Benefactor|500=Sponsor'
-			, 'image' => $options['show_image']
-      , 'long_description' => $options['more_info']
+			, 'image' => (isset($options['show_image'])) ? $options['show_image'] : null
+      , 'long_description' => (isset($options['more_info'])) ? $options['more_info'] : ''
 		);
 
 	}//--	fn	__construct

@@ -209,31 +209,31 @@ class razoo_options_page {
     <div class="row">
       <label for="donation_amount[1]">$</label> <input id="donation_amount[1]" name="donation_amount[1]" type="text" class="small-text" value="" />
       <input id="donation_title[1]" name="donation_title[1]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[1]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+      <img id="donation-trash[1]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
     </div>
     
     <div class="row">
       <label for="donation_amount[2]">$</label> <input id="donation_amount[2]" name="donation_amount[2]" type="text" class="small-text" value="" />
       <input id="donation_title[2]" name="donation_title[2]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[2]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+      <img id="donation-trash[2]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
     </div>
     
     <div class="row">
       <label for="donation_amount[3]">$</label> <input id="donation_amount[3]" name="donation_amount[3]" type="text" class="small-text" value="" />
       <input id="donation_title[3]" name="donation_title[3]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[3]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+      <img id="donation-trash[3]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
     </div>
     
-    <div class="row">
+    <div class="row hide">
       <label for="donation_amount[4]">$</label> <input id="donation_amount[4]" name="donation_amount[4]" type="text" class="small-text" value="" />
       <input id="donation_title[4]" name="donation_title[1]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[4]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+      <img id="donation-trash[4]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
     </div>
     
-    <div class="row">
+    <div class="row hide">
       <label for="donation_amount[5]">$</label> <input id="donation_amount[5]" name="donation_amount[5]" type="text" class="small-text" value="" />
       <input id="donation_title[5]" name="donation_title[1]" type="text" class="regular-text" value="" />
-      <img id="donation-trash[5]" src="http://assets0.razoo.com/images/unified_card/remove.png?07da071ea064d067c018d8684a4cf40a56ee6e1c" />
+      <img id="donation-trash[5]" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/trash-can.png" />
     </div>
 </div>
     <?php
@@ -272,6 +272,9 @@ class razoo_options_page {
     <style>
       .razoo-widget { margin: 50px 100px; }
       .settings_page_razoo-donation-widget-settings .form-table { width: auto; clear: none; }
+      #donation-option-fields .row img { vertical-align: middle; cursor: pointer; }
+      #donation-option-fields .hide { display: none; }
+      .settings_page_razoo-donation-widget-settings .default { color: gray; text-decoration: none; }
     </style>
     <?php
   }
