@@ -145,7 +145,7 @@ class razoo_options_page {
   //Charity ID
   function id_input(){
     $options = get_option('razoo_options');
-    $id = $options['charity_id'];
+    $id = str_replace(' ', '-', sanitize_text_field($options['charity_id']));
     
     echo '<input id="id" name="razoo_options[charity_id]" type="text" value="' . $id .'" class="regular-text" />';
     echo '<p class="description">This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at <a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>.</p>';
@@ -154,7 +154,7 @@ class razoo_options_page {
   //Widget Title
   function title_input(){
     $options = get_option('razoo_options');
-    $title = $options['title'];
+    $title = sanitize_text_field($options['title']);
     
     echo '<input id="title" name="razoo_options[title]" type="text" value="' . $title .'" class="regular-text" />';
     echo '<p class="description">The title will show up in big letters at the top of the donation widget.</p>';
@@ -163,7 +163,7 @@ class razoo_options_page {
   //Summary
   function summary_input(){
     $options = get_option('razoo_options');
-    $summary = $options['summary'];
+    $summary = sanitize_text_field($options['summary']);
     
     echo '<input id="summary" name="razoo_options[summary]" type="text" value="' . $summary .'" class="regular-text" />';
     echo '<p class="description">The summary is a short description of your organization or an ask for people to donate.  This text shows up just below the title.</p>';
@@ -172,7 +172,7 @@ class razoo_options_page {
   //More Info
   function more_info_textarea(){
     $options = get_option('razoo_options');
-    $more_info = $options['more_info'];
+    $more_info = wp_strip_all_tags($options['more_info']);
     
     echo '<textarea id="more-info" rows="5" name="razoo_options[more_info]" class="large-text">' . $more_info .'</textarea>';
     echo '<p class="description">The more info section can be much longer, describing more about your organization and where the donors money will go.  This text shows up when users click the "More info" link on the donation widget.</p>';
@@ -181,7 +181,7 @@ class razoo_options_page {
   //Color
   function color_input(){
     $options = get_option('razoo_options');
-    $color = ($options['color'] != "") ? $options['color'] : '#3D9B0C';
+    $color = ($options['color'] != "") ? sanitize_text_field($options['color']) : '#3D9B0C';
     
     echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
     echo '<p class="description">Provide the color you want for the donation widget in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.</p>';
@@ -191,7 +191,7 @@ class razoo_options_page {
   //Show Image
   function show_image_input(){
     $options = get_option('razoo_options');
-    $show_image = $options['show_image'];
+    $show_image = (isset($options['show_image'])) ? 'true' : null;
     
     echo '<label for="show-image"><input id="show-image" name="razoo_options[show_image]" type="checkbox" value="true" ' . checked($show_image, 'true', false) . '/>';
     echo ' Do you want the main image for your organization to show up on the donation widget?</label>';
@@ -200,7 +200,7 @@ class razoo_options_page {
   //Donation Options
   function donation_option_input(){
     $options = get_option('razoo_options');
-    $donation_options = (isset($options['donation_options'])) ? $options['donation_options'] : null;
+    $donation_options = (isset($options['donation_options'])) ? sanitize_text_field($options['donation_options']) : null;
     
     if($donation_options != ''){
       $donation_options = explode('|', $donation_options);
@@ -243,17 +243,17 @@ class razoo_options_page {
   }
   
   
-  //Validation
+  //Sanitize and Validate
   function validate_options( $input ){
     $valid = array();
-    $valid['charity_id'] = $input['charity_id'];
-    $valid['title'] = $input['title'];
-    $valid['summary'] = $input['summary'];
-    $valid['more_info'] = $input['more_info'];
-    $valid['color'] = $input['color'];
-    $valid['show_image'] = $input['show_image'];
-    $valid['donation_options'] = $input['donation_options'];
-    //TODO Do real validation
+    
+    $valid['charity_id'] = str_replace(' ', '-', sanitize_text_field($input['charity_id']));
+    $valid['title'] = sanitize_text_field($input['title']);
+    $valid['summary'] = sanitize_text_field($input['summary']);
+    $valid['more_info'] = wp_strip_all_tags($input['more_info']);
+    $valid['color'] = sanitize_text_field($input['color']);
+    $valid['show_image'] = (isset($input['show_image'])) ? 'true' : null;
+    $valid['donation_options'] = sanitize_text_field($input['donation_options']);
     
     return $valid;
   }

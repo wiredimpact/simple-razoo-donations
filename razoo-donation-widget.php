@@ -7,7 +7,7 @@ Plugin Name: Razoo Donation Widget
 Plugin URI: http://www.atlanticbt.com/blog/wordpress-plugin-razoo-donation-widget/
 Description: Embed a customizable Razoo Donation widget. See also: <a href="http://www.razoo.com/p/donationWidget">Razoo Widget Creator</a>.
 Version: 0.9
-Author: atlanticbt, zaus
+Author: atlanticbt, zaus, wiredimpact
 Author URI: http://atlanticbt.com/
 License: GPLv2
 */
@@ -41,13 +41,13 @@ class razoo_donation_widget {
     $options = get_option('razoo_options');
         
 		self::$default_atts = array(
-			'id' => (isset($options['charity_id']) && $options['charity_id'] != '') ? $options['charity_id'] : 'United-Way-of-America'
-			, 'title' => (isset($options['title'])) ? $options['title'] : ''
-			, 'short_description' => (isset($options['summary'])) ? $options['summary'] : ''
-			, 'color' => (isset($options['color'])) ? $options['color'] : ''
-			, 'donation_options' => (isset($options['donation_options'])) ? $options['donation_options'] : ''
-			, 'image' => (isset($options['show_image'])) ? $options['show_image'] : null
-      , 'long_description' => (isset($options['more_info'])) ? $options['more_info'] : ''
+			'id' => (isset($options['charity_id']) && $options['charity_id'] != '') ? str_replace(' ', '-', sanitize_text_field($options['charity_id'])) : 'United-Way-of-America',
+			'title' => (isset($options['title'])) ? sanitize_text_field($options['title']) : '',
+			'short_description' => (isset($options['summary'])) ? sanitize_text_field($options['summary']) : '',
+      'long_description' => (isset($options['more_info'])) ? wp_strip_all_tags($options['more_info']) : '',
+			'color' => (isset($options['color'])) ? sanitize_text_field($options['color']) : '',
+      'image' => (isset($options['show_image'])) ? 'true' : null,
+			'donation_options' => (isset($options['donation_options'])) ? sanitize_text_field($options['donation_options']) : ''
 		);
 
 	}//--	fn	__construct
