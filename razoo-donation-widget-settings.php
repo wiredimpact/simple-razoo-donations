@@ -18,8 +18,25 @@ class razoo_settings_page {
     add_action('admin_init', array($this, 'settings_init'));
     add_action('admin_head', array($this, 'custom_admin_css'));
     add_action('admin_head', array($this, 'add_styles_scripts'));
-    
+    add_filter( 'plugin_action_links_' . RAZOO_DONATION_BASENAME, array($this, 'add_plugin_settings_link'), 10, 2);
   }
+  
+  /**
+   * Add a settings link to our plugin on the Plugins list page.
+   * 
+   * @param array $links An array with all the links for htat plugin.
+   * @return array $links All the links including our new settingg link.
+   */
+  public function add_plugin_settings_link( $links ) {
+
+    return array_merge(
+      array(
+        'settings' => '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/options-general.php?page=razoo-donation-widget-settings">Settings</a>'
+      ),
+      $links
+    );
+
+  } 
   
   /**
    * Add the settings page using the WordPress Settings API

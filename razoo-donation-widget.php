@@ -206,14 +206,15 @@ class razoo_donation_widget {
 
 
 //Setup some constants for us to more easily work with files
+define("RAZOO_DONATION_BASENAME", plugin_basename(__FILE__) );
 define("RAZOO_DONATION_PLUGINPATH", "/" . plugin_basename(dirname(__FILE__)) . "/");
 define("RAZOO_DONATION_PLUGINFULLPATH", WP_PLUGIN_DIR . RAZOO_DONATION_PLUGINPATH);
 define("RAZOO_DONATION_PLUGINFULLURL", WP_PLUGIN_URL . RAZOO_DONATION_PLUGINPATH);
 
 //Include the settings and button if we're in the admin section.
 if(is_admin()){
-  require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-settings.php');
-  require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-button.php');
+  include_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-settings.php');
+  include_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-button.php');
 }
 
 // engage!
