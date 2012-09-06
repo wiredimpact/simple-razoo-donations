@@ -174,7 +174,7 @@ class razoo_settings_page {
       <li>Click the blue "Publish" or "Update" button to save your changes and add the widget to your live website.</li>
     </ol>
     
-  <?php }
+  <?php } //TODO Add a link to online documentation that covers using the shortcode attributes for a custom page widget.
   
   /**
    * Settings Section and Fields
