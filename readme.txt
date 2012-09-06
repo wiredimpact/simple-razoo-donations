@@ -26,24 +26,25 @@ Actually based on the "share" widget creator (from the "embed this on your site"
 = Shortcode usage? =
 Long version, with attributes + content:
 
-	[razoo_widget
-		id="Mynonprofit"
-		title="My Non Profit"
-		short_description="Please let us know how much you want to donate:"
-		color="#f1a632"
-		donation_options="5=Friend|25=Benefactor|100=Benefactor|500=Sponsor"
-		]
-	{ long_description }
-	[/razoo_widget]
+  [razoo_widget
+    id="United-Way-of-America"
+    title="Support United Way"
+    short_description="This is a short description"
+    long_description="United Way has been supporting communities since the late 1800s and now supports communities in countries around the world.  This is an example of a long description."
+    color="#000000"
+    image="true"
+    donation_options="20=Donor|30=Sponsor|50=True Contributor"
+  ]
 
 where
 
 * __id__: (required) the donation account id
 * __title__: shown on widget first tab
 * __short_description__: shown on tab with donation amounts
+* __long_description__: a bigger description
 * __color__: the border/theme
+* __image__: use "true" to show the organization's image
 * __donation_options__: a url-formatted string, or more safely a pipe (|) separated list of values and labels
-* __long_description__: a bigger description, either given as an attribute or as the shortcode content.  If given as an attribute, you don't need the closing `[/razoo_widget]`
 
 = How to put shortcode in widget? =
 
@@ -59,6 +60,9 @@ Use a filter to apply shortcode processing to widgets.
 3. Example of embedded, rendered razoo widget
 
 == Changelog ==
+
+= 1.0 =
+* Added a settings page along with an editor button to easily add the widget to any page or post.
 
 = 0.9 =
 * submitting to WP repository, readme, screenshots

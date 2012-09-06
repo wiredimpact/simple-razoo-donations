@@ -54,14 +54,14 @@ class razoo_donation_widget {
    * 
 	 * @param $atts shortcode attributes {id, title, short_description, color, donation_options, image, long_description}
 	 */
-	function shortcode_widget_customize($atts, $content = NULL){
+	function shortcode_widget_customize($atts){
 		$shortcode_params = shortcode_atts(self::$default_atts, $atts);
 		   
     if($shortcode_params['donation_options'] != ''){
       $shortcode_params['donation_options'] = self::parse_query_string($shortcode_params['donation_options']);
     }
     
-		return $this->embed($shortcode_params, $content);
+		return $this->embed($shortcode_params);
 	}//--	fn	shortcode_widget_customize
   
   /**
@@ -83,10 +83,9 @@ class razoo_donation_widget {
 	/**
 	 * Add razoo widget - embed with options
    * 
-	 * @param $shortcode_params shortcode attributes {id, title, short_description, color, donation_options, image}
-	 * @param $content shortcode content {i.e. long_description}
+	 * @param $shortcode_params shortcode attributes {id, title, short_description, long_description, color, donation_options, image}
 	 */
-	function embed($shortcode_params, $content = NULL) {
+	function embed($shortcode_params) {
 		extract($shortcode_params);
 		
 		// cheat!
