@@ -1,7 +1,18 @@
 <?php
 
-class razoo_options_page {
+/**
+ * Razoo Donation Widget Settings
+ *
+ * Creates a settings page for the plugin and handles saving the settings to the database.
+ *
+ * @version 0.1
+ * @author Wired Impact (wiredimpact) - http://wiredimpact.com
+ */
+class razoo_settings_page {
   
+  /**
+	 * Initiate the settings page by adding the appropriate actions
+	 */
   public function __construct() {
     add_action('admin_menu', array($this, 'add_settings_page'));
     add_action('admin_init', array($this, 'settings_init'));
@@ -10,6 +21,9 @@ class razoo_options_page {
     
   }
   
+  /**
+   * Add the settings page using the WordPress Settings API
+   */
   public function add_settings_page(){
     $settings = add_options_page(
       'Razoo Donation Widget',
@@ -23,6 +37,9 @@ class razoo_options_page {
     add_action('load-' . $settings, array($this, 'add_styles_scripts'));
   }
   
+  /**
+   * Build the basic structure for the settings page including form, fields, and submit button.
+   */
   public function settings_page_content(){
     ?>
     <div class="wrap">
@@ -43,6 +60,9 @@ class razoo_options_page {
     <?php
   }
   
+  /**
+   * Add the setting sections and fields.
+   */
   function settings_init(){
     register_setting(
       'razoo_options',
@@ -124,7 +144,9 @@ class razoo_options_page {
     
   }
   
-  //Documentation text
+  /**
+   * Output the text for documentation.
+   */
   function options_docs_text(){ ?>
     <p>To add the Razoo Donation widget to your website follow these steps:</p>
     <ol>
@@ -137,12 +159,16 @@ class razoo_options_page {
     
   <?php }
   
-  //Settings Section and Fields
+  /**
+   * Settings Section and Fields
+   */
   function options_settings_text(){
     echo '<p>Adjust your Razoo Donation Widget settings.  Every time you save changes the widget on the right will update to show you exactly what it will look like on your website.';
   }
   
-  //Charity ID
+  /**
+   * Charity ID Field
+   */
   function id_input(){
     $options = get_option('razoo_options');
     $id = str_replace(' ', '-', sanitize_text_field($options['charity_id']));
@@ -151,7 +177,9 @@ class razoo_options_page {
     echo '<p class="description">This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at <a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>.</p>';
   }
   
-  //Widget Title
+  /**
+   * Widget Title Field
+   */
   function title_input(){
     $options = get_option('razoo_options');
     $title = sanitize_text_field($options['title']);
@@ -160,7 +188,9 @@ class razoo_options_page {
     echo '<p class="description">The title will show up in big letters at the top of the donation widget.</p>';
   }
   
-  //Summary
+  /**
+   * Summary Field
+   */
   function summary_input(){
     $options = get_option('razoo_options');
     $summary = sanitize_text_field($options['summary']);
@@ -169,7 +199,9 @@ class razoo_options_page {
     echo '<p class="description">The summary is a short description of your organization or an ask for people to donate.  This text shows up just below the title.</p>';
   }
   
-  //More Info
+  /**
+   * More Info Field
+   */
   function more_info_textarea(){
     $options = get_option('razoo_options');
     $more_info = wp_strip_all_tags($options['more_info']);
@@ -178,7 +210,9 @@ class razoo_options_page {
     echo '<p class="description">The more info section can be much longer, describing more about your organization and where the donors money will go.  This text shows up when users click the "More info" link on the donation widget.</p>';
   }
   
-  //Color
+  /**
+   * Color Field
+   */
   function color_input(){
     $options = get_option('razoo_options');
     $color = ($options['color'] != "") ? sanitize_text_field($options['color']) : '#3D9B0C';
@@ -188,7 +222,9 @@ class razoo_options_page {
     echo '<div id="colorpicker"></div>';
   }
   
-  //Show Image
+  /**
+   * Show Image Field
+   */
   function show_image_input(){
     $options = get_option('razoo_options');
     $show_image = (isset($options['show_image'])) ? 'true' : null;
@@ -197,7 +233,9 @@ class razoo_options_page {
     echo ' Do you want the main image for your organization to show up on the donation widget?</label>';
   }
   
-  //Donation Options
+  /**
+   * Donation Options Field
+   */
   function donation_option_input(){
     $options = get_option('razoo_options');
     $donation_options = (isset($options['donation_options'])) ? sanitize_text_field($options['donation_options']) : null;
@@ -244,7 +282,13 @@ class razoo_options_page {
   }
   
   
-  //Sanitize and Validate
+  /**
+   * Sanitize and validate the submitted field.
+   * This is called using register_setting in the WordPress API.
+   * 
+   * @param array The content of all the submitted fields within these settings.
+   * @return array Sanitized valid content to be written to the database.
+   */
   function validate_options( $input ){
     $valid = array();
     
@@ -259,8 +303,16 @@ class razoo_options_page {
     return $valid;
   }
   
-  //Make the rows to handle the donation amounts and descriptions
-  function make_donation_row($num, $donation_amount = null, $donation_description = null, $hide = false){
+  /**
+   * Make the rows to handle the donation amounts and descriptions
+   * 
+   * @param int $num The number of the current donation amount row (0-5)
+   * @param float $donation_amount The donation amount in dollars.
+   * @param string $donation_description The description for that donation amount.
+   * @param boolean $hide Whether the row should be hidden upon page load.
+   * @return string HTML for the given donation option row.
+   */
+  function make_donation_row( $num, $donation_amount = null, $donation_description = null, $hide = false ){
     $row = '';
     
     $row .= '<div class="row';
@@ -278,7 +330,9 @@ class razoo_options_page {
     return $row;
   }
   
-  //Admin CSS and JS
+  /**
+   * Add CSS to the settings page.
+   */
   function custom_admin_css(){
     ?>
     <style>
@@ -295,6 +349,9 @@ class razoo_options_page {
     <?php
   }
   
+  /**
+   * Enqueue the styles and scripts needed for the settings.
+   */
   function add_styles_scripts(){
     wp_enqueue_style( 'farbtastic' );
     wp_enqueue_script( 'farbtastic' );
@@ -304,4 +361,4 @@ class razoo_options_page {
 }
 
 //Create Our Settings Page!
-new razoo_options_page();
+new razoo_settings_page();

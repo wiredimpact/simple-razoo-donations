@@ -1,14 +1,11 @@
 <?php
-/**
- * @package ABT
- */
 /*
 Plugin Name: Razoo Donation Widget
 Plugin URI: http://www.atlanticbt.com/blog/wordpress-plugin-razoo-donation-widget/
 Description: Embed a customizable Razoo Donation widget. See also: <a href="http://www.razoo.com/p/donationWidget">Razoo Widget Creator</a>.
 Version: 0.9
 Author: atlanticbt, zaus, wiredimpact
-Author URI: http://atlanticbt.com/
+Author URI: http://atlanticbt.com/, http://wiredimpact.com
 License: GPLv2
 */
 
@@ -54,8 +51,8 @@ class razoo_donation_widget {
 
 	/**
 	 * Add razoo widget - shortcode handler
-	 * @param $atts shortcode attributes {id, title, short_description, color, donation_options, image}
-	 * @param $content shortcode content {i.e. long_description}
+   * 
+	 * @param $atts shortcode attributes {id, title, short_description, color, donation_options, image, long_description}
 	 */
 	function shortcode_widget_customize($atts, $content = NULL){
 		$shortcode_params = shortcode_atts(self::$default_atts, $atts);
@@ -67,7 +64,11 @@ class razoo_donation_widget {
 		return $this->embed($shortcode_params, $content);
 	}//--	fn	shortcode_widget_customize
   
-  //Function used to put donation options in the correct format for JSON encoding
+  /**
+   * Parse a string in the correct format for JSON encoding
+   * 
+   * @param string $string The strig that you want to parse.
+   */
   function parse_query_string($string) { 
     $op = array(); 
     $pairs = explode("|", $string); 
@@ -81,6 +82,7 @@ class razoo_donation_widget {
 
 	/**
 	 * Add razoo widget - embed with options
+   * 
 	 * @param $shortcode_params shortcode attributes {id, title, short_description, color, donation_options, image}
 	 * @param $content shortcode content {i.e. long_description}
 	 */
@@ -121,6 +123,7 @@ class razoo_donation_widget {
 	
 	/**
 	 * Substitute encoder when lacking native function
+   * 
 	 * @param $data the stuff to encode
 	 * @param $flags flags used by json_encode
 	 * @see http://www.php.net/manual/en/function.json-encode.php#100835
@@ -212,10 +215,6 @@ if(is_admin()){
   require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-settings.php');
   require_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-button.php');
 }
+
 // engage!
 new razoo_donation_widget();
-
-
-
-
-?>
