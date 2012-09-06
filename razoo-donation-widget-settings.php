@@ -209,7 +209,8 @@ class razoo_options_page {
       }
     }
     
-    echo '<p class="description">Add the donation options you want to offer potential donors with the amount in the small box and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.  </p>';
+    echo '<p class="description">Add the donation options you want to offer potential donors with the amount in the small box <strong>($10 Min.)</strong> and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.</p>';
+    echo '<p class="hide" id="donation-options-error">Oops, at least one of your donation amounts is less than $10.00.  Please increase the amount and save your changes.</p>';
     
     //Add three donation amounts by default or if they already have them add as many as they have    
     echo '<div id="donation-option-fields">';
@@ -238,7 +239,7 @@ class razoo_options_page {
     echo '<p class="description"><a href="#" id="add-donation-amount">Add Donation Amount (Up to 5)</a></p>';
     
     //Add hidden input that is updated on save with the data from all the fields using jQuery
-    echo '<input id="donation-options" name="razoo_options[donation_options]" type="hidden" value="' . $donation_options .'" />';
+    echo '<input id="donation-options" name="razoo_options[donation_options]" type="hidden" value="" />';
     
   }
   
@@ -285,7 +286,9 @@ class razoo_options_page {
       .razoo-widget { margin: 50px 100px; }
       #razoo-settings .form-table { width: auto; clear: none; }
       #donation-option-fields .row img { vertical-align: middle; cursor: pointer; }
-      #donation-option-fields .hide { display: none; }
+      #donation-option-fields .hide, #donation-options-error.hide { display: none; }
+      #donation-options-error { color: #C00; }
+      #donation-option-fields .error { border: 1px solid #C00; }
       #razoo-settings .default { color: gray; text-decoration: none; }
       #razoo-settings .default:hover { cursor: default; }
     </style>

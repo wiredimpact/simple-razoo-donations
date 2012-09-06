@@ -36,11 +36,39 @@ jQuery(document).ready(function(){
     }
   });
   
-  //Pull the donation amount and description into a string that can be used in the widget
+  //Check for proper amounts then put amounts into correct string
   jQuery('#razoo-settings').submit(function(){
-    var donate_options = '';
     
-    donation_option_fields.find('.row .small-text').each(function(){
+    var amount_fields = donation_option_fields.find('.row .small-text'),
+    donate_options = '',
+    bad_field = false;
+    
+    //Check if each amount is greater than 10, and if not, throw an error
+    amount_fields.each(function(){
+      
+      var $this = jQuery(this);  
+          
+      if($this.val() !== ''){
+       
+       var dollar_amount = parseFloat($this.val()).toFixed(2);
+        
+        if(dollar_amount < 10.00){
+          
+          $this.addClass('error');
+          bad_field = true;
+        
+        }  
+      }  
+    });
+    
+    if(bad_field === true){
+      jQuery('#donation-options-error').removeClass('hide');
+      
+      return false;
+    }
+        
+    //Pull the donation amount and description into a string that can be used in the widget
+    amount_fields.each(function(){
       
       var $this = jQuery(this);
       
