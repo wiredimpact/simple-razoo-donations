@@ -31,7 +31,7 @@ class razoo_settings_page {
 
     return array_merge(
       array(
-        'settings' => '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/options-general.php?page=razoo-donation-widget-settings">Settings</a>'
+        'settings' => '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/options-general.php?page=razoo-donation-widget-settings">' . __('Settings') . '</a>'
       ),
       $links
     );
@@ -43,8 +43,8 @@ class razoo_settings_page {
    */
   public function add_settings_page(){
     $settings = add_options_page(
-      'Razoo Donation Widget',
-      'Razoo Donation Widget',
+      __('Razoo Donation Widget'),
+      __('Razoo Donation Widget'),
       'manage_options',
       'razoo-donation-widget-settings',
       array($this, 'settings_page_content')
@@ -61,7 +61,7 @@ class razoo_settings_page {
     ?>
     <div class="wrap">
       <?php screen_icon(); ?>
-      <h2>Razoo Donation Widget</h2>
+      <h2><?php _e('Razoo Donation Widget'); ?></h2>
       <form id="razoo-settings" action="options.php" method="post">
         
         <?php settings_fields('razoo_options'); ?>
@@ -69,7 +69,7 @@ class razoo_settings_page {
         <?php do_settings_sections('razoo-donation-widget-settings'); ?>
         
         <p class="submit">
-          <input id="razoo-submit" name="Submit" type="submit" class="button-primary" value="Save Changes & Update Donation Widget" />
+          <input id="razoo-submit" name="Submit" type="submit" class="button-primary" value="<?php _e('Save Changes & Update Donation Widget'); ?>" />
         </p>
         
       </form>
@@ -90,7 +90,7 @@ class razoo_settings_page {
     /**Documentation Info**/
     add_settings_section(
       'razoo-options-docs',
-      'How to Add the Donation Widget to Your Website',
+      __('How to Add the Donation Widget to Your Website'),
       array($this, 'options_docs_text'),
       'razoo-donation-widget-settings'
     );
@@ -98,14 +98,14 @@ class razoo_settings_page {
     /**Option Settings**/
     add_settings_section(
       'razoo-options-main',
-      'Settings',
+      __('Settings'),
       array($this, 'options_settings_text'),
       'razoo-donation-widget-settings'
     );
     
     add_settings_field(
       'charity_id',
-      'Razoo ID',
+      __('Razoo ID'),
       array($this, 'id_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -113,7 +113,7 @@ class razoo_settings_page {
     
     add_settings_field(
       'title',
-      'Title',
+      __('Title'),
       array($this, 'title_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -121,7 +121,7 @@ class razoo_settings_page {
     
     add_settings_field(
       'summary',
-      'Summary',
+      __('Summary'),
       array($this, 'summary_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -129,7 +129,7 @@ class razoo_settings_page {
     
     add_settings_field(
       'more-info',
-      'More Info',
+      __('More Info'),
       array($this, 'more_info_textarea'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -137,7 +137,7 @@ class razoo_settings_page {
     
     add_settings_field(
       'color',
-      'Color',
+      __('Color'),
       array($this, 'color_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -145,7 +145,7 @@ class razoo_settings_page {
     
     add_settings_field(
       'image',
-      'Show Image',
+      __('Show Image'),
       array($this, 'show_image_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -153,7 +153,7 @@ class razoo_settings_page {
     
     add_settings_field(
       'donation-options',
-      'Donation Options',
+      __('Donation Options'),
       array($this, 'donation_option_input'),
       'razoo-donation-widget-settings',
       'razoo-options-main'
@@ -165,13 +165,13 @@ class razoo_settings_page {
    * Output the text for documentation.
    */
   function options_docs_text(){ ?>
-    <p>To add the Razoo Donation widget to your website follow these steps:</p>
+    <p><?php _e('To add the Razoo Donation widget to your website follow these steps:'); ?></p>
     <ol>
-      <li>Complete the settings below with all your organization's information, then save your changes.</li>
-      <li>Go to the edit screen for the page or post where you want to add the donation widget.</li>
-      <li>Place your cursor within the editor's text where you want the donation widget to be added.</li>
-      <li>Click the Razoo icon in the WordPress editor toolbar <img class="editor-icon" src="<?php echo RAZOO_DONATION_PLUGINFULLURL; ?>img/razoo-icon.png" />.  The Razoo shortcode reading "[razoo_widget]" will be added in the editor.</li>
-      <li>Click the blue "Publish" or "Update" button to save your changes and add the widget to your live website.</li>
+      <li><?php _e('Complete the settings below with all your organization\'s information, then save your changes.'); ?></li>
+      <li><?php _e('Go to the edit screen for the page or post where you want to add the donation widget.'); ?></li>
+      <li><?php _e('Place your cursor within the editor\'s text where you want the donation widget to be added.'); ?></li>
+      <li><?php echo __('Click the Razoo icon in the WordPress editor toolbar ') . '<img class="editor-icon" src="' . RAZOO_DONATION_PLUGINFULLURL . 'img/razoo-icon.png" />' .  __('. The Razoo shortcode reading "[razoo_widget]" will be added in the editor.'); ?></li>
+      <li><?php _e('Click the blue "Publish" or "Update" button to save your changes and add the widget to your live website.'); ?></li>
     </ol>
     
   <?php } //TODO Add a link to online documentation that covers using the shortcode attributes for a custom page widget.
@@ -180,7 +180,7 @@ class razoo_settings_page {
    * Settings Section and Fields
    */
   function options_settings_text(){
-    echo '<p>Adjust your Razoo Donation Widget settings.  Every time you save changes the widget on the right will update to show you exactly what it will look like on your website.';
+    echo '<p>' . __('Adjust your Razoo Donation Widget settings.  Every time you save changes the widget on the right will update to show you exactly what it will look like on your website.') . '</p>';
   }
   
   /**
@@ -191,7 +191,7 @@ class razoo_settings_page {
     $id = str_replace(' ', '-', sanitize_text_field($options['charity_id']));
     
     echo '<input id="id" name="razoo_options[charity_id]" type="text" value="' . $id .'" class="regular-text" />';
-    echo '<p class="description">This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at <a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>.</p>';
+    echo '<p class="description">' . __('This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at ') . '<a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">' . __('http://www.razoo.com/story/United-Way-Of-America') . '</a>.</p>';
   }
   
   /**
@@ -202,7 +202,7 @@ class razoo_settings_page {
     $title = sanitize_text_field($options['title']);
     
     echo '<input id="title" name="razoo_options[title]" type="text" value="' . $title .'" class="regular-text" />';
-    echo '<p class="description">The title will show up in big letters at the top of the donation widget.</p>';
+    echo '<p class="description">' . __('The title will show up in big letters at the top of the donation widget.') . '</p>';
   }
   
   /**
@@ -213,7 +213,7 @@ class razoo_settings_page {
     $summary = sanitize_text_field($options['summary']);
     
     echo '<input id="summary" name="razoo_options[summary]" type="text" value="' . $summary .'" class="regular-text" />';
-    echo '<p class="description">The summary is a short description of your organization or an ask for people to donate.  This text shows up just below the title.</p>';
+    echo '<p class="description">' . __('The summary is a short description of your organization or an ask for people to donate.  This text shows up just below the title.') . '</p>';
   }
   
   /**
@@ -224,7 +224,7 @@ class razoo_settings_page {
     $more_info = wp_strip_all_tags($options['more_info']);
     
     echo '<textarea id="more-info" rows="5" name="razoo_options[more_info]" class="large-text">' . $more_info .'</textarea>';
-    echo '<p class="description">The more info section can be much longer, describing more about your organization and where the donors money will go.  This text shows up when users click the "More info" link on the donation widget.</p>';
+    echo '<p class="description">' . __('The more info section can be much longer, describing more about your organization and where the donors money will go.  This text shows up when users click the "More info" link on the donation widget.') . '</p>';
   }
   
   /**
@@ -235,7 +235,7 @@ class razoo_settings_page {
     $color = ($options['color'] != "") ? sanitize_text_field($options['color']) : '#3D9B0C';
     
     echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
-    echo '<p class="description">Provide the color you want for the donation widget in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.</p>';
+    echo '<p class="description">' . __('Provide the color you want for the donation widget in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.') . '</p>';
     echo '<div id="colorpicker"></div>';
   }
   
@@ -247,7 +247,8 @@ class razoo_settings_page {
     $show_image = (isset($options['show_image'])) ? 'true' : null;
     
     echo '<label for="show-image"><input id="show-image" name="razoo_options[show_image]" type="checkbox" value="true" ' . checked($show_image, 'true', false) . '/>';
-    echo ' Do you want the main image for your organization to show up on the donation widget?</label>';
+    _e(' Do you want the main image for your organization to show up on the donation widget?');
+    echo '</label>';
   }
   
   /**
@@ -264,8 +265,8 @@ class razoo_settings_page {
       }
     }
     
-    echo '<p class="description">Add the donation options you want to offer potential donors with the amount in the small box <strong>($10 Min.)</strong> and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.</p>';
-    echo '<p class="hide" id="donation-options-error">Oops, at least one of your donation amounts is less than $10.00.  Please increase the amount and save your changes.</p>';
+    echo '<p class="description">' . __('Add the donation options you want to offer potential donors with the amount in the small box <strong>($10 Min.)</strong> and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.') . '</p>';
+    echo '<p class="hide" id="donation-options-error">' . __('Oops, at least one of your donation amounts is less than $10.00.  Please increase the amount and save your changes.') . '</p>';
     
     //Add three donation amounts by default or if they already have them add as many as they have    
     echo '<div id="donation-option-fields">';
@@ -291,7 +292,7 @@ class razoo_settings_page {
     }
     echo '</div>';
     
-    echo '<p class="description"><a href="#" id="add-donation-amount">Add Donation Amount (Up to 5)</a></p>';
+    echo '<p class="description"><a href="#" id="add-donation-amount">' . __('Add Donation Amount (Up to 5)') . '</a></p>';
     
     //Add hidden input that is updated on save with the data from all the fields using jQuery
     echo '<input id="donation-options" name="razoo_options[donation_options]" type="hidden" value="" />';
