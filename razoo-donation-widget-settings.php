@@ -247,7 +247,7 @@ class razoo_settings_page {
     $show_image = (isset($options['show_image'])) ? 'true' : null;
     
     echo '<label for="show-image"><input id="show-image" name="razoo_options[show_image]" type="checkbox" value="true" ' . checked($show_image, 'true', false) . '/>';
-    _e(' Do you want the main image for your organization to show up on the donation widget?');
+    _e(' Show main image for your organization on the donation widget');
     echo '</label>';
   }
   
@@ -265,7 +265,6 @@ class razoo_settings_page {
       }
     }
     
-    echo '<p class="description">' . __('Add the donation options you want to offer potential donors with the amount in the small box <strong>($10 Min.)</strong> and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.') . '</p>';
     echo '<p class="hide" id="donation-options-error">' . __('Oops, at least one of your donation amounts is less than $10.00.  Please increase the amount and save your changes.') . '</p>';
     
     //Add three donation amounts by default or if they already have them add as many as they have    
@@ -292,7 +291,8 @@ class razoo_settings_page {
     }
     echo '</div>';
     
-    echo '<p class="description"><a href="#" id="add-donation-amount">' . __('Add Donation Amount (Up to 5)') . '</a></p>';
+    echo '<p class="description"><a href="#" id="add-donation-amount">' . __('Add Donation Option (Up to 5 Total)') . '</a></p>';
+    echo '<p class="description">' . __('Add the donation options you want to offer potential donors with the amount in the small box <strong>($10 Min.)</strong> and the description in the large box.  Please only use numbers and periods in the amount field.  The numbers will also be sorted automatically with the smallest donation amounts coming first.  The field for donors to input an amount of their choosing will always be added.') . '</p>';
     
     //Add hidden input that is updated on save with the data from all the fields using jQuery
     echo '<input id="donation-options" name="razoo_options[donation_options]" type="hidden" value="" />';
