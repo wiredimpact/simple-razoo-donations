@@ -10,6 +10,11 @@ jQuery(document).ready(function(){
     return total_showing_fields;
   }
   
+  //If no fields then hide labels
+  if(get_showing_total() === 0){
+    jQuery('#option-labels').addClass('hide');
+  }
+  
   //Click to add donation option
   add_donation_amount.click(function(){
     donation_option_fields.find('.row.hide').first().removeClass('hide');
@@ -20,6 +25,8 @@ jQuery(document).ready(function(){
     else {
       jQuery(this).removeClass('default');
     }
+    
+    jQuery('#option-labels').removeClass('hide');
           
     return false;
   });
@@ -31,8 +38,14 @@ jQuery(document).ready(function(){
     $this.closest('.row').addClass('hide');
     $this.siblings('input').val('');
     
-    if(get_showing_total() < 5){
+    var showing_total = get_showing_total();
+    
+    if(showing_total < 5){ //Show link to add
       add_donation_amount.removeClass('default');
+    }
+    
+    if(showing_total === 0){ //Remove labels for amount and description
+      $this.closest('#donation-option-fields').siblings('#option-labels').addClass('hide');
     }
   });
   

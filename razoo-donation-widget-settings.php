@@ -266,7 +266,7 @@ class razoo_settings_page {
     }
     
     echo '<p class="hide" id="donation-options-error">' . __('Oops, at least one of your donation amounts is less than $10.00.  Please increase the amount and save your changes.') . '</p>';
-    
+    echo '<div id="option-labels"><span class="amount">' . __('Amount') . '</span><span class="amount-description">' . __('Description') . '</span></div>';
     //Add three donation amounts by default or if they already have them add as many as they have    
     echo '<div id="donation-option-fields">';
     if(isset($donation_options)){
@@ -355,10 +355,12 @@ class razoo_settings_page {
     ?>
     <style>
       #razoo-settings .editor-icon { vertical-align: middle; }
-      .razoo-widget { margin: 50px 100px; }
+      .razoo-widget { margin: 200px 100px; }
       #razoo-settings .form-table { width: auto; clear: none; }
+      #razoo-settings span.amount { margin-left: 12px; width: 51px; display: inline-block; font-size: .9em; }
+      #razoo-settings span.amount-description { font-size: .9em; }
       #donation-option-fields .row img { vertical-align: middle; cursor: pointer; }
-      #donation-option-fields .hide, #donation-options-error.hide { display: none; }
+      #donation-option-fields .hide, #donation-options-error.hide, #option-labels.hide { display: none; }
       #donation-options-error { color: #C00; }
       #donation-option-fields .error { border: 1px solid #C00; }
       #razoo-settings .default { color: gray; text-decoration: none; }
