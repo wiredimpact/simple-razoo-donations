@@ -1,9 +1,9 @@
 === Razoo Donation Widget ===
 Contributors: atlanticbt, zaus
-Donate link: http://atlanticbt.com/
+Donate link: http://wiredimpact.com/
 Tags: ecommerce, donation, widget, razoo
 Requires at least: 2.8
-Tested up to: 3.2.1
+Tested up to: 3.4.2
 Stable tag: trunk
 
 Simple shortcode wrapper to embed a customized Razoo donation widget.  See http://www.razoo.com/p/donationWidget for more detail.
@@ -61,51 +61,5 @@ Use a filter to apply shortcode processing to widgets.
 
 == Changelog ==
 
-= 1.0 =
-* Added a settings page along with an editor button to easily add the widget to any page or post.
-
-= 0.9 =
-* submitting to WP repository, readme, screenshots
-
-= 0.5 =
-* created as plugin
-
 = 0.1 =
-* Direct embed code
-
-== Upgrade Notice ==
-
-= 0.9 =
-First added to repository.
-
-== About Razoo ==
-
-[Read more](http://www.razoo.com/p/overview) about the Razoo platform.  The following is copied from that link.
-
-= What is Razoo? =
-
-**More than a Website**
-
-Razoo is a movement of people who want to make generosity a part of everyday life.
-
-**Living Generously**
-
-Generosity is win-win. Not only does it make the world a better place, it also makes us happy and fulfilled - especially when we give to the people and causes we care about most.
-
-= What Can I Do on Razoo? =
-
-**Donate**
-
-Search for and donate to 1 million officially registered nonprofit organizations.
-
-**Fundraise**
-
-Set up a fundraiser for a charity of your choice. There are no setup fees and no monthly subscription fees.
-
-**Collaborate**
-
-Raise money as a team on Razoo. Or simply help others spread the word about their cause.
-
-**Go Mobile!**
-
-Razoo's new iPhone app lets you monitor fundraising status, post updates and thank your donors.
+* First release to WordPress plugin repository

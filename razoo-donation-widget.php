@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Razoo Donation Widget
-Plugin URI: http://www.atlanticbt.com/blog/wordpress-plugin-razoo-donation-widget/
-Description: Embed a customizable Razoo Donation widget. See also: <a href="http://www.razoo.com/p/donationWidget">Razoo Widget Creator</a>.
-Version: 0.9
-Author: atlanticbt, zaus, wiredimpact
-Author URI: http://atlanticbt.com/, http://wiredimpact.com
+Plugin Name: //TODO Razoo Donation Widget
+Plugin URI: //TODO Full URL to Our Webpage with Documentation
+Description: //TODO Embed a customizable Razoo Donation widget. See also: <a href="http://www.razoo.com/p/donationWidget">Razoo Widget Creator</a>.
+Version: 0.1
+Author: wiredimpact
+Author URI: http://wiredimpact.com/
 License: GPLv2
 */
 
