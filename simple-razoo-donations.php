@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: //TODO Razoo Donation Widget
-Plugin URI: //TODO Full URL to Our Webpage with Documentation
-Description: //TODO Embed a customizable Razoo Donation widget. See also: <a href="http://www.razoo.com/p/donationWidget">Razoo Widget Creator</a>.
+Plugin Name: Simple Razoo Donations
+Plugin URI: http://wiredimpact.com/simple-razoo-donations/
+Description: Easily add the <a href='http://www.razoo.com/p/donationWidget'>Razoo Donation Widget</a> to your website by filling out your settings and adding the donation form via a button in the WordPress editor.
 Version: 0.1
-Author: wiredimpact
+Author: Wired Impact
 Author URI: http://wiredimpact.com/
 License: GPLv2
 */
@@ -14,14 +14,14 @@ GPLv2 - read it - http://www.gnu.org/licenses/license-list.html#GPLCompatibleLic
 */
 
 /**
- * Plugin wrapper - razoo donation widget
+ * Plugin wrapper - razoo donation form
  *
  * Embed a razoo donation widget on your site
  *
- * @author AtlanticBT, Jeremy Schwartz (zaus) - http://atlanticbt.com
+ * @author Wired Impact - @wiredimpact
  * 
  */
-class razoo_donation_widget {
+class razoo_donation_form {
 
 	/**
 	 * Internal, global storage for defaults
@@ -32,7 +32,7 @@ class razoo_donation_widget {
 	 * Initiate the plugin, options, etc
 	 */
 	public function __construct(){
-		add_shortcode('razoo_widget', array(&$this, 'shortcode_widget_customize'));
+		add_shortcode('razoo_donation_form', array(&$this, 'shortcode_form_customize'));
 		
 		// set some defaults
     $options = get_option('razoo_options');
@@ -54,7 +54,7 @@ class razoo_donation_widget {
    * 
 	 * @param $atts shortcode attributes {id, title, short_description, color, donation_options, image, long_description}
 	 */
-	function shortcode_widget_customize($atts){
+	function shortcode_form_customize($atts){
 		$shortcode_params = shortcode_atts(self::$default_atts, $atts);
 		   
     if($shortcode_params['donation_options'] != ''){
@@ -62,7 +62,7 @@ class razoo_donation_widget {
     }
     
 		return $this->embed($shortcode_params);
-	}//--	fn	shortcode_widget_customize
+	}//--	fn	shortcode_form_customize
   
   /**
    * Parse a string in the correct format for JSON encoding
@@ -81,7 +81,7 @@ class razoo_donation_widget {
   } 
 
 	/**
-	 * Add razoo widget - embed with options
+	 * Add razoo form - embed with options
    * 
 	 * @param $shortcode_params shortcode attributes {id, title, short_description, long_description, color, donation_options, image}
 	 */
@@ -100,15 +100,12 @@ class razoo_donation_widget {
 	</div>
 	<script type='text/javascript'>
 	var r_params = {
-		"title":"<?php echo addslashes($title) ?>"
-		,"short_description":"<?php /* note that you need the charset to correctly interpret quotes? */ echo addslashes( html_entity_decode($short_description, ENT_QUOTES, 'UTF-8') ) ?>"
-		,"long_description":"<?php /* note that you need the charset to correctly interpret quotes? */ echo addslashes( html_entity_decode($long_description, ENT_QUOTES, 'UTF-8') ) ?>"
-		,"color":"<?php echo $color ?>"
-		,"donation_options": <?php
-			// turn listing into json list
-			echo self::fallback_json_encode( $donation_options );
-			?>
-		,"image":"<?php echo ($image == 'true') ? $image : 'false'; ?>"
+		"title":"<?php echo addslashes($title) ?>",
+		"short_description":"<?php /* note that you need the charset to correctly interpret quotes? */ echo addslashes( html_entity_decode($short_description, ENT_QUOTES, 'UTF-8') ) ?>",
+		"long_description":"<?php /* note that you need the charset to correctly interpret quotes? */ echo addslashes( html_entity_decode($long_description, ENT_QUOTES, 'UTF-8') ) ?>",
+		"color":"<?php echo $color ?>",
+		"donation_options": <?php echo self::fallback_json_encode( $donation_options ); // turn listing into json list ?>,
+		"image":"<?php echo ($image == 'true') ? $image : 'false'; ?>"
 		};
 		var r_protocol=(("https:"==document.location.protocol)?"https://":"http://");var r_path='www.razoo.com/javascripts/widget_loader.js';
 		var r_identifier='<?php echo $id?>';
@@ -201,7 +198,7 @@ class razoo_donation_widget {
 
 
   
-}//---	class	razoo_donation_widget
+}//---	class	razoo_donation_form
 
 
 //Setup some constants for us to more easily work with files
@@ -212,9 +209,9 @@ define("RAZOO_DONATION_PLUGINFULLURL", WP_PLUGIN_URL . RAZOO_DONATION_PLUGINPATH
 
 //Include the settings and button if we're in the admin section.
 if(is_admin()){
-  include_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-settings.php');
-  include_once(RAZOO_DONATION_PLUGINFULLPATH . 'razoo-donation-widget-button.php');
+  include_once(RAZOO_DONATION_PLUGINFULLPATH . 'simple-razoo-donations-settings.php');
+  include_once(RAZOO_DONATION_PLUGINFULLPATH . 'simple-razoo-donations-button.php');
 }
 
 // engage!
-new razoo_donation_widget();
+new razoo_donation_form();

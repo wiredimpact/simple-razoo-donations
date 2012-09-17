@@ -80,7 +80,7 @@ jQuery(document).ready(function(){
       return false;
     }
         
-    //Pull the donation amount and description into a string that can be used in the widget
+    //Pull the donation amount and description into a string that can be used in the donation form
     amount_fields.each(function(){
       
       var $this = jQuery(this);

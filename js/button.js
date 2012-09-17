@@ -2,10 +2,10 @@
   tinymce.create('tinymce.plugins.Razoo', {
     init : function(ed, url) {
       ed.addButton('razoo', {
-        title : 'Insert Razoo Donation Widget Shortcode',
+        title : 'Insert Razoo Donation Form Shortcode',
         image : url.replace('js', 'img/razoo-icon.png'),
         onclick : function() {
-          ed.execCommand('mceInsertContent', false, '[razoo_widget]');
+          ed.execCommand('mceInsertContent', false, '[razoo_donation_form]');
         }
       });
     },
@@ -14,7 +14,7 @@
     },
     getInfo : function() {
       return {
-        longname : "Razoo Donation Widget Shortcode",
+        longname : "Razoo Donation Form Shortcode",
         author : 'Wired Impact',
         authorurl : 'http://wiredimpact.com/',
         infourl : 'http://wiredimpact.com/',

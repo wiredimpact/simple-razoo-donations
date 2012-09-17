@@ -1,65 +1,74 @@
-=== Razoo Donation Widget ===
-Contributors: atlanticbt, zaus
-Donate link: http://wiredimpact.com/
-Tags: ecommerce, donation, widget, razoo
+=== Simple Razoo Donations ===
+Contributors: wiredimpact 
+Tags: razoo, donation, shortcode, donate, forms
 Requires at least: 2.8
 Tested up to: 3.4.2
 Stable tag: trunk
 
-Simple shortcode wrapper to embed a customized Razoo donation widget.  See http://www.razoo.com/p/donationWidget for more detail.
+Easily add the [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) to your website by filling out your settings and adding the donation form via a button in the WordPress editor.
+
 
 == Description ==
 
-Razoo is a free donation platform for non-profits to easily accept donations.  They provide an embeddable widget for your site.  This plugin exposes this form as a shortcode for you to drop in your pages and posts. See also [Razoo Widget Creator](http://www.razoo.com/p/donationWidget).
+Easily add the [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) to your website by filling out your settings and adding the Razoo donation form via a button in the WordPress editor.  The button will place the shortcode directly in the editor.
 
-Actually based on the "share" widget creator (from the "embed this on your site" link on the widget) to customize the options + basic appearance.
+The [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) typically works by copying and pasting code from the Razoo website.  Unfortunately, that code doesn't work when placed within the WordPress editor.  This plugin allows you to  customize the Razoo donation form, then add the Razoo donation form via a shortcode right into your post or page.
+
+The settings page allows you to set defaults which you can use throughout your website and also provides instructions on how to add the Razoo donation form to your website.  If you'd like some donation forms to use different settings than the defaults, you can use shortcode attributes to customize each donation form.  See the FAQs for specifics on how to do this.
+
+**Thanks**
+
+A special thanks to [Zaus](http://profiles.wordpress.org/zaus/) and [AtlanticBT](http://profiles.wordpress.org/atlanticbt/) for providing the foundation for this plugin.
+
+**Clearing Up Confusion About "Widget"**
+
+We also want to clear up any confusion about the name given to the donation form by Razoo.  The name "Razoo Donation Widget" includes the word widget, but that does not refer to a WordPress widget.  There is no widget functionality included with this plugin.
+
 
 == Installation ==
 
-1. Upload the plugin folder to your plugins directory `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Use the shortcode `[razoo_widget]` _(with options)_ anywhere you can use shortcodes.
-4. If you want to put the widget (shortcode) in a Widget, you'll need to allow shortcodes in widgets
+1. Download the Simple Razoo Donations plugin and unzip the files
+1. Upload the simple-razoo-donations folder to the /wp-content/plugins/ directory
+1. Activate the Simple Razoo Donations plugin through the "Plugins" menu in WordPress
+1. Configure your donation form settings by going to Settings >> Simple Razoo Donations in the WordPress backend
+1. Place your cursor within the WordPress editor's text where you want the Razoo donation form to be added.
+1. Click the Razoo icon in the WordPress editor toolbar (looks like a globe broken into pieces). The Razoo shortcode reading "[razoo_donation_form]" will be added in the editor.
+1. Click the blue "Publish" or "Update" button to save your changes and add the Razoo donation form to your live website.
+
 
 == Frequently Asked Questions ==
 
-= Shortcode usage? =
-Long version, with attributes + content:
+= How do I customize the donation form for different pages? =
+If you want to put different versions of the donation form on different pages of your website, you can use shortcode attributes to override the default options you used on the settings page.  You only need to include attributes for the defaults you wish to override.  For example, if every donation should go to the same organization, you will never need to use the "id" attribute.  An example shortcode with all attributes looks like this:
 
-  [razoo_widget
-    id="United-Way-of-America"
-    title="Support United Way"
-    short_description="This is a short description"
-    long_description="United Way has been supporting communities since the late 1800s and now supports communities in countries around the world.  This is an example of a long description."
-    color="#000000"
-    image="true"
-    donation_options="20=Donor|30=Sponsor|50=True Contributor"
-  ]
+`[razoo_donation_form id="United-Way-of-America" title="Support United Way" short_description="Help us help the community" long_description="United Way has been supporting communities since the late 1800s and now supports communities in countries around the world." color="#000000" image="true" donation_options="20=Donor|30=Sponsor|50=All Star Contributor"]`
 
-where
+Here is a breakdown of how to use each attribute:
 
-* __id__: (required) the donation account id
-* __title__: shown on widget first tab
-* __short_description__: shown on tab with donation amounts
-* __long_description__: a bigger description
-* __color__: the border/theme
-* __image__: use "true" to show the organization's image
-* __donation_options__: a url-formatted string, or more safely a pipe (|) separated list of values and labels
+* id:  The ID for your organization according to Razoo. When on your organization's landing page it's the text that comes right after "/story/". For example, the United Way of America's ID is "United-Way-Of-America". You can view their ID at [http://www.razoo.com/story/United-Way-Of-America](http://www.razoo.com/story/United-Way-Of-America).
+* title: The title will show up in big letters at the top of the donation widget.
+* short_description: A short description of your organization or an ask for people to donate. This text shows up just below the title.
+* long_description: The more info section can be much longer, describing more about your organization and where the donors money will go. This text shows up when users click the "More info" link on the donation widget.
+* color: Provide the color you want for the donation form in [hexadecimal format (#000000)](http://www.w3schools.com/html/html_colors.asp). You should match this closely to your website's colors.
+* image: use "true" to show the main image for your organization on the donation widget
+* donation_options: Add the donation options you want to offer potential donors with in a pipe (|) separated list of values and labels
 
-= How to put shortcode in widget? =
+= How do I use the shortcode in a template file? =
 
-Use a filter to apply shortcode processing to widgets.
+To add the shortcode directly to a template file use the code:
 
-[Filter](http://digwp.com/2010/03/shortcodes-in-widgets/): `<?php add_filter('widget_text', 'do_shortcode'); ?>`
+`<?php echo do_shortcode('[razoo_donation_form]'); ?>`
 
 
 == Screenshots ==
 
-1. Customized shortcode with full options
-2. Basic shortcode with minimal options
-3. Example of embedded, rendered razoo widget
+1. Razoo donation form outputted on a website
+2. Settings page for your organization's defaults
+3. WordPress editor button to add the donation form
+4. Shortcode appears after you click the Razoo button on the editor
+
 
 == Changelog ==
 
 = 0.1 =
-* First release to WordPress plugin repository
+* Initial release
