@@ -5,12 +5,14 @@ Requires at least: 2.8
 Tested up to: 3.4.2
 Stable tag: trunk
 
-Easily add the [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) to your website by filling out your settings and adding the donation form via a button in the WordPress editor.
+Simple Razoo Donations allows you to easily add the [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) to your website by filling out your settings and clicking a button in the WordPress editor.
 
 
 == Description ==
 
 Easily add the [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) to your website by filling out your settings and adding the Razoo donation form via a button in the WordPress editor.  The button will place the shortcode directly in the editor.
+
+**Why is the Simple Razoo Donations plugin helpful?**
 
 The [Razoo Donation Widget](http://www.razoo.com/p/donationWidget Razoo Donation Widget) typically works by copying and pasting code from the Razoo website.  Unfortunately, that code doesn't work when placed within the WordPress editor.  This plugin allows you to  customize the Razoo donation form, then add the Razoo donation form via a shortcode right into your post or page.
 
@@ -26,6 +28,8 @@ We also want to clear up any confusion about the name given to the donation form
 
 
 == Installation ==
+
+**How Do I Install the Plugin and Add the Donation Form to My Website?**
 
 1. Download the Simple Razoo Donations plugin and unzip the files
 1. Upload the simple-razoo-donations folder to the /wp-content/plugins/ directory

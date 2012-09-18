@@ -180,7 +180,7 @@ class razoo_settings_page {
    * Settings Section and Fields
    */
   function options_settings_text(){
-    echo '<p>' . __('Adjust your Razoo donation form settings.  Every time you save changes the donation form on the right will update to show you exactly what it will look like on your website.  Any changes saved here will adjust all the donation forms on your website that are not overriden with shortcode attributes.  For more information on how to use shortcode attributes to customize specific forms check out our website at ') . '<a href="http://wiredimpact.com/simple-razoo-donations/" target="_blank">' . __('http://wiredimpact.com/simple-razoo-donations/') . '</a>.</p>';
+    echo '<p>' . __('Use the settings below to adjust the Razoo donation form.  Every time you save changes the donation form on the right will update to show you exactly what it will look like on your website.  Any changes saved here will adjust all the donation forms on your website that are not overriden with shortcode attributes.  For more information on how to use shortcode attributes to customize specific forms on your website check out ') . '<a href="http://wiredimpact.com/simple-razoo-donations/" target="_blank">' . __('http://wiredimpact.com/simple-razoo-donations/') . '</a>.</p>';
   }
   
   /**
