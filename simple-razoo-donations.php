@@ -2,7 +2,7 @@
 /*
 Plugin Name: Simple Razoo Donations
 Plugin URI: http://wiredimpact.com/simple-razoo-donations/
-Description: Easily add the <a href='http://www.razoo.com/p/donationWidget'>Razoo Donation Widget</a> to your website by filling out your settings and adding the donation form via a button in the WordPress editor.
+Description: Simple Razoo Donations allows you to easily embed the <a href='http://www.razoo.com/p/donationWidget'>Razoo Donation Widget</a> and accept donations on your website without typing a line of code.
 Version: 0.1
 Author: Wired Impact
 Author URI: http://wiredimpact.com/

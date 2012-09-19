@@ -29,7 +29,7 @@ A special thanks to [Zaus](http://profiles.wordpress.org/zaus/) and [AtlanticBT]
 
 **Visit the Plugin's Webpage**
 
-For more details about using the plugin visit [http://wiredimpact.com/simple-razoo-donations](http://wiredimpact.com/simple-razoo-donations Simple Razoo Donations Webpage).
+For more details about using the plugin visit [http://wiredimpact.com/simple-razoo-donations/](http://wiredimpact.com/simple-razoo-donations/ Simple Razoo Donations Webpage).
 
 
 == Installation ==
@@ -57,6 +57,7 @@ Now that you've installed the plugin you're ready to add the donation form to yo
 Here are some frequently asked questions about how to use the plugin.
 
 = How do I customize the donation form for different pages? =
+
 If you want to put different versions of the donation form on different pages of your website, you can use shortcode attributes to override the default options you provided on the settings page. You only need to include attributes for the defaults you wish to override. For example, if every donation should go to the same organization, you will never need to use the "id" attribute in your shortcode. An example shortcode with all attributes looks like this:
 
 `[razoo_donation_form id="United-Way-of-America" title="Support United Way" short_description="Help us help the community" long_description="United Way has been supporting communities since the late 1800s and now supports communities in countries around the world." color="#000000" image="true" donation_options="20=Donor|30=Sponsor|50=All Star Contributor"]`
@@ -72,6 +73,7 @@ Here is a breakdown of how to use each attribute:
 * donation_options: Add the donation options you want to offer potential donors within a pipe (|) separated list of values and labels (ie. donation_options="20=Donor|30=Sponsor|50=All Star Contributor")
 
 = How do I use the shortcode in a template file? =
+
 To add the shortcode directly to a template file use the code:
 
 `<?php echo do_shortcode('[razoo_donation_form]'); ?>`
