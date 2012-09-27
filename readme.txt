@@ -91,6 +91,9 @@ To add the shortcode directly to a template file use the code:
 
 == Changelog ==
 
+= 0.1.2 =
+* Fixed how the plugins scripts were being called.
+
 = 0.1.1 =
 * Fixed "Settings" link on plugins page to point correctly.
 
@@ -98,6 +101,9 @@ To add the shortcode directly to a template file use the code:
 * Initial release
 
 == Upgrade Notice ==
+
+= 0.1.2 =
+This version fixes bug where scripts were being called on all admin pages and not just the settings.
 
 = 0.1.1 =
 This version fixes bug where "Settings" link on plugins page didn't point correctly.
