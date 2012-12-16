@@ -234,7 +234,7 @@ class razoo_settings_page {
     $color = ($options['color'] != "") ? sanitize_text_field($options['color']) : '#3D9B0C';
     
     echo '<input id="color" name="razoo_options[color]" type="text" value="' . $color .'" />';
-    echo '<p class="description">' . __('Provide the color you want for the donation form in <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal format</a> (#000000).  You should match this closely to your website\'s colors.  You can also use the color picker below to make your selection.') . '</p>';
+    echo '<p class="description">' . __('Provide the color you want to use for the donation form using the color picker.  If possible, you should match this to one of your website\'s colors by using a <a href="http://www.w3schools.com/html/html_colors.asp" target="_blank">hexadecimal value</a> (#000000).') . '</p>';
     echo '<div id="colorpicker"></div>';
   }
   
