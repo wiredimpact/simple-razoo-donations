@@ -372,8 +372,17 @@ class razoo_settings_page {
    * Enqueue the styles and scripts needed for the settings.
    */
   function add_styles_scripts(){
-    wp_enqueue_style( 'farbtastic' );
-    wp_enqueue_script( 'farbtastic' );
+    global $wp_version;
+    
+    if ( 3.5 <= $wp_version ){
+      wp_enqueue_style( 'wp-color-picker' );
+      wp_enqueue_script( 'wp-color-picker' );
+    }
+    else {
+      wp_enqueue_style( 'farbtastic' );
+      wp_enqueue_script( 'farbtastic' );
+    }
+    
     wp_enqueue_script('razoo-settings', RAZOO_DONATION_PLUGINFULLURL . 'js/settings.js');
   }
   

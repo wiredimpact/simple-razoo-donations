@@ -113,6 +113,11 @@ jQuery(document).ready(function(){
 
 //Run the color picker.
 jQuery(document).ready(function(){
-  jQuery('#colorpicker').farbtastic('#color');
+  if( typeof jQuery.wp == 'object' && typeof jQuery.wp.wpColorPicker == 'function' ){
+    jQuery('#color').wpColorPicker();
+  }
+  else {
+    jQuery('#colorpicker').farbtastic('#color');
+  }
 }); //End Document Ready
 
