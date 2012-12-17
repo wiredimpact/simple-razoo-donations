@@ -112,8 +112,9 @@ jQuery(document).ready(function(){
 
 
 //Run the color picker.
-jQuery(document).ready(function(){
-  if( typeof jQuery.wp == 'object' && typeof jQuery.wp.wpColorPicker == 'function' ){
+jQuery(document).ready(function(){  
+  //This if statement checks if the color picker widget exists within jQuery UI
+  if( typeof jQuery.wp === 'object' && typeof jQuery.wp.wpColorPicker === 'function' ){
     jQuery('#color').wpColorPicker();
   }
   else {
