@@ -97,6 +97,10 @@ To add the shortcode directly to a template file use the code:
 
 == Changelog ==
 
+= 0.1.7 =
+* Tested up to WordPress 4.4
+* Add SVN eol-style = native where missing
+
 = 0.1.6 =
 * Tested up to WordPress 4.2
 
