@@ -1,9 +1,10 @@
 <?php
 /*
 Plugin Name: Simple Razoo Donations
+Text Domain: simple-razoo-donations
 Plugin URI: http://wiredimpact.com/simple-razoo-donations/
 Description: Simple Razoo Donations allows you to easily embed the <a href='http://www.razoo.com/p/donationWidget'>Razoo Donation Widget</a> and accept donations on your website without typing a line of code.
-Version: 0.1.7
+Version: 0.1.8
 Author: Wired Impact
 Author URI: http://wiredimpact.com/
 License: GPLv2
@@ -32,6 +33,9 @@ class razoo_donation_form {
 	 * Initiate the plugin, options, etc
 	 */
 	public function __construct(){
+        //Load translations
+        add_action( 'init', array( $this, 'load_plugin_textdomain') );
+
 		add_shortcode('razoo_donation_form', array(&$this, 'shortcode_form_customize'));
 		
 		// set some defaults
