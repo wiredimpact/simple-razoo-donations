@@ -190,7 +190,13 @@ class razoo_settings_page {
     $id = str_replace(' ', '-', sanitize_text_field($options['charity_id']));
     
     echo '<input id="id" name="razoo_options[charity_id]" type="text" value="' . $id .'" class="regular-text" />';
-    echo '<p class="description">' . __( 'This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">' . __( 'http://www.razoo.com/story/United-Way-Of-America', 'simple-razoo-donations' ) . '</a>.' . __('  If you\'ve never used Razoo before you can find your nonprofit by searching at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/search" target="_blank">' __( 'http://www.razoo.com/search', 'simple-razoo-donations' ) . '</a>.</p>';
+
+	// original
+//    echo '<p class="description">' . __( 'This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">' . __( 'http://www.razoo.com/story/United-Way-Of-America', 'simple-razoo-donations' ) . '</a>.' . __('  If you\'ve never used Razoo before you can find your nonprofit by searching at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/search" target="_blank">' __( 'http://www.razoo.com/search', 'simple-razoo-donations' ) . '</a>.</p>';
+    
+	echo '<p class="description">' . __( 'This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>' . __('  If you\'ve never used Razoo before you can find your nonprofit by searching at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/search" target="_blank">http://www.razoo.com/search</a>.</p>';
+
+
   }
   
   /**
