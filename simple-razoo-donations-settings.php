@@ -169,7 +169,7 @@ class razoo_settings_page {
       <li><?php _e( 'Complete the settings below with all your organization\'s information, then save your changes.', 'simple-razoo-donations' ); ?></li>
       <li><?php _e( 'Go to the edit screen for the page or post where you want to add the donation form.', 'simple-razoo-donations' ); ?></li>
       <li><?php _e( 'Place your cursor within the editor\'s text where you want the donation form to be added.', 'simple-razoo-donations' ); ?></li>
-      <li><?php echo __( 'Click the Razoo icon in the WordPress editor toolbar ', 'simple-razoo-donations' ) . '<img class="editor-icon" src="' . RAZOO_DONATION_PLUGINFULLURL . 'img/razoo-icon.png" />' .  __('. The Razoo shortcode reading "[razoo_donation_form]" will be added in the editor.', 'simple-razoo-donations' ); ?></li>
+      <li><?php printf( __( 'Click the Razoo icon in the WordPress editor toolbar %s. The Razoo shortcode reading "[razoo_donation_form]" will be added in the editor.', 'simple-razoo-donations' ), '<img class="editor-icon" src="' . RAZOO_DONATION_PLUGINFULLURL . 'img/razoo-icon.png" />' ); ?></li>
       <li><?php _e( 'Click the blue "Publish" or "Update" button to save your changes and add the form to your live website.', 'simple-razoo-donations' ); ?></li>
     </ol>
     
@@ -179,7 +179,7 @@ class razoo_settings_page {
    * Settings Section and Fields
    */
   function options_settings_text(){
-    echo '<p>' . __( 'Use the settings below to adjust the Razoo donation form.  Every time you save changes the donation form on the right will update to show you exactly what it will look like on your website.  Any changes saved here will adjust all the donation forms on your website that are not overriden with shortcode attributes.  For more information on how to use shortcode attributes to customize specific forms on your website check out ', 'simple-razoo-donations' ) . '<a href="http://wiredimpact.com/simple-razoo-donations/" target="_blank">' . __( 'http://wiredimpact.com/simple-razoo-donations/', 'simple-razoo-donations' ) . '</a>.</p>';
+    echo '<p>' . sprintf( __( 'Use the settings below to adjust the Razoo donation form.  Every time you save changes the donation form on the right will update to show you exactly what it will look like on your website.  Any changes saved here will adjust all the donation forms on your website that are not overriden with shortcode attributes.  For more information on how to use shortcode attributes to customize specific forms on your website check out %s.', 'simple-razoo-donations' ), '<a href="http://wiredimpact.com/simple-razoo-donations/" target="_blank">http://wiredimpact.com/simple-razoo-donations/</a>' ) . '</p>';
   }
   
   /**
@@ -189,9 +189,13 @@ class razoo_settings_page {
     $options = get_option('razoo_options');
     $id = str_replace(' ', '-', sanitize_text_field($options['charity_id']));
     
+    $razoo_united_way_link = '<a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>';
+    $razoo_search_link = '<a href="http://www.razoo.com/search" target="_blank">http://www.razoo.com/search</a>';
     echo '<input id="id" name="razoo_options[charity_id]" type="text" value="' . $id .'" class="regular-text" />';
-	echo '<p class="description">' . __( 'This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/story/United-Way-Of-America" target="_blank">http://www.razoo.com/story/United-Way-Of-America</a>' . __('  If you\'ve never used Razoo before you can find your nonprofit by searching at ', 'simple-razoo-donations' ) . '<a href="http://www.razoo.com/search" target="_blank">http://www.razoo.com/search</a>.</p>';
-
+	  echo '<p class="description">';
+      printf( __( 'This is the ID for your organization according to Razoo.  When on your organization\'s landing page it\'s the text that comes right after "/story/".  For example, the United Way of America\'s ID is "United-Way-Of-America".  You can view their ID at %s. If you\'ve never used Razoo before you can find your nonprofit by searching at %s.', 'simple-razoo-donations' ),
+           $razoo_united_way_link, $razoo_search_link );
+    echo '</p>';
 
   }
   

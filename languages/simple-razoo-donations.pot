@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2015-12-16 10:15-0600\n"
+"POT-Creation-Date: 2015-12-17 10:04-0600\n"
 "PO-Revision-Date: 2015-12-16 10:15-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -85,13 +86,10 @@ msgid ""
 msgstr ""
 
 #: simple-razoo-donations-settings.php:172
-msgid "Click the Razoo icon in the WordPress editor toolbar "
-msgstr ""
-
-#: simple-razoo-donations-settings.php:172
+#, php-format
 msgid ""
-". The Razoo shortcode reading \"[razoo_donation_form]\" will be added in the "
-"editor."
+"Click the Razoo icon in the WordPress editor toolbar %s. The Razoo shortcode "
+"reading \"[razoo_donation_form]\" will be added in the editor."
 msgstr ""
 
 #: simple-razoo-donations-settings.php:173
@@ -101,31 +99,24 @@ msgid ""
 msgstr ""
 
 #: simple-razoo-donations-settings.php:182
+#, php-format
 msgid ""
 "Use the settings below to adjust the Razoo donation form.  Every time you "
 "save changes the donation form on the right will update to show you exactly "
 "what it will look like on your website.  Any changes saved here will adjust "
 "all the donation forms on your website that are not overriden with shortcode "
 "attributes.  For more information on how to use shortcode attributes to "
-"customize specific forms on your website check out "
+"customize specific forms on your website check out %s."
 msgstr ""
 
-#: simple-razoo-donations-settings.php:182
-msgid "http://wiredimpact.com/simple-razoo-donations/"
-msgstr ""
-
-#: simple-razoo-donations-settings.php:197
+#: simple-razoo-donations-settings.php:196
+#, php-format
 msgid ""
 "This is the ID for your organization according to Razoo.  When on your "
 "organization's landing page it's the text that comes right after \"/story/"
 "\".  For example, the United Way of America's ID is \"United-Way-Of-America"
-"\".  You can view their ID at "
-msgstr ""
-
-#: simple-razoo-donations-settings.php:197
-msgid ""
-"  If you've never used Razoo before you can find your nonprofit by searching "
-"at "
+"\".  You can view their ID at %s. If you've never used Razoo before you can "
+"find your nonprofit by searching at %s."
 msgstr ""
 
 #: simple-razoo-donations-settings.php:210
@@ -186,4 +177,9 @@ msgid ""
 "numbers will also be sorted automatically with the smallest donation amounts "
 "coming first.  The field for donors to input an amount of their choosing "
 "will always be added."
+msgstr ""
+
+#: simple-razoo-donations.php:114
+#, php-format
+msgid "%sDonate Online%s to %s at Razoo"
 msgstr ""

@@ -35,7 +35,7 @@ class razoo_donation_form {
 	 */
 	public function __construct(){
         //Load translations
-        add_action( 'init', array( $this, 'load_plugin_textdomain') );
+        add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain') );
 
 		add_shortcode('razoo_donation_form', array(&$this, 'shortcode_form_customize'));
 		
@@ -55,7 +55,7 @@ class razoo_donation_form {
 	}//--	fn	__construct
     
     
-    /*
+    /**
      * Internationalization
      */
     public function load_plugin_textdomain() {
@@ -65,7 +65,7 @@ class razoo_donation_form {
     
 	/**
 	 * Add razoo widget - shortcode handler
-   * 
+     * 
 	 * @param $atts shortcode attributes {id, title, short_description, color, donation_options, image, long_description}
 	 */
 	function shortcode_form_customize($atts){
@@ -110,7 +110,12 @@ class razoo_donation_form {
 		<!-- from http://www.razoo.com/story/<?php echo $id ?>/share -->
 
 	<div id='razoo_donation_widget'>
-		<span><a href="http://www.razoo.com/">Donate online</a> to <a href="http://www.razoo.com/story/<?php echo $id ?>"><?php echo $title ?></a> at Razoo</span>
+		<span>
+		<?php printf( __( '%sDonate Online%s to %s at Razoo', 'simple-razoo-donations' ),
+					'<a href="http://www.razoo.com/">',
+					'</a>',
+					'<a href="http://www.razoo.com/story/' . $id . '">' . $title . '</a>' ); ?>
+		</span>
 	</div>
 	<script type='text/javascript'>
 	var r_params = {
