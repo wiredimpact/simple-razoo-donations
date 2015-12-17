@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2015-12-17 10:04-0600\n"
+"POT-Creation-Date: 2015-12-17 10:29-0600\n"
 "PO-Revision-Date: 2015-12-16 10:15-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -136,40 +136,37 @@ msgid ""
 "users click the \"More info\" link on the donation form."
 msgstr ""
 
-#: simple-razoo-donations-settings.php:243
+#: simple-razoo-donations-settings.php:244
+#, php-format
 msgid ""
 "Provide the color you want to use for the donation form using the color "
 "picker.  If possible, you should match this to one of your website's colors "
-"by using a "
+"by using a %shexadecimal value%s (#000000)."
 msgstr ""
 
-#: simple-razoo-donations-settings.php:243
-msgid "hexadecimal value"
-msgstr ""
-
-#: simple-razoo-donations-settings.php:255
+#: simple-razoo-donations-settings.php:260
 msgid " Show the main image for your organization on the donation form"
 msgstr ""
 
-#: simple-razoo-donations-settings.php:273
+#: simple-razoo-donations-settings.php:278
 msgid ""
 "Oops, at least one of your donation amounts is less than $10.00.  Please "
 "increase the amount and save your changes."
 msgstr ""
 
-#: simple-razoo-donations-settings.php:274
+#: simple-razoo-donations-settings.php:279
 msgid "Amount"
 msgstr ""
 
-#: simple-razoo-donations-settings.php:274
+#: simple-razoo-donations-settings.php:279
 msgid "Description"
 msgstr ""
 
-#: simple-razoo-donations-settings.php:299
+#: simple-razoo-donations-settings.php:304
 msgid "Add Donation Option (Up to 5 Total)"
 msgstr ""
 
-#: simple-razoo-donations-settings.php:300
+#: simple-razoo-donations-settings.php:305
 msgid ""
 "Add the donation options you want to offer potential donors with the amount "
 "in the small box <strong>($10 Min.)</strong> and the description in the "
