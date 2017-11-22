@@ -59,8 +59,7 @@ class razoo_settings_page {
   public function settings_page_content(){
     ?>
     <div class="wrap">
-      <?php screen_icon(); ?>
-      <h2><?php _e( 'Simple Razoo Donations', 'simple-razoo-donations' ); ?></h2>
+      <h1><?php _e( 'Simple Razoo Donations', 'simple-razoo-donations' ); ?></h1>
       <form id="razoo-settings" action="options.php" method="post">
 
         <?php settings_fields('razoo_options'); ?>
